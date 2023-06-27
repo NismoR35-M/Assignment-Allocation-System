@@ -19,13 +19,14 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'staff_number',
         'email',
+        'phone_number',
+        'allocations',
         'password',
-        'location',
-        'phone',
-        'about',
-        'password_confirmation'
+        'is_active',
     ];
 
     /**
@@ -51,5 +52,15 @@ class User extends Authenticatable
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function assignments()
+    {
+        return $this->belongsToMany(Assignment::class, 'junctions', 'users_id', 'assignments_id');
+    }
+
+    public function userassignments()
+    {
+        return $this->hasMany(Junction::class, 'users_id');
+    } 
 
 }

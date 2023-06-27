@@ -10,7 +10,7 @@
                         <div class="card my-4">
                             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                                 <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                    <h6 class="text-white text-capitalize ps-3">Authors table</h6>
+                                    <h6 class="text-white text-capitalize ps-3">Asignments table</h6>
                                 </div>
                             </div>
                             <div class="card-body px-0 pb-2">
@@ -20,16 +20,16 @@
                                             <tr>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    Author</th>
+                                                    Name</th>
                                                 <th
                                                     class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                    Function</th>
+                                                    Request Type</th>
                                                 <th
                                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                     Status</th>
                                                 <th
                                                     class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                    Employed</th>
+                                                    Company Name</th>
                                                 <th class="text-secondary opacity-7"></th>
                                             </tr>
                                         </thead>
@@ -60,13 +60,6 @@
                                                     <span
                                                         class="text-secondary text-xs font-weight-bold">23/04/18</span>
                                                 </td>
-                                                <td class="align-middle">
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
-                                                        Edit
-                                                    </a>
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -93,14 +86,7 @@
                                                 <td class="align-middle text-center">
                                                     <span
                                                         class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
-                                                        Edit
-                                                    </a>
-                                                </td>
+                                                </td>                                           
                                             </tr>
                                             <tr>
                                                 <td>
@@ -127,13 +113,6 @@
                                                 <td class="align-middle text-center">
                                                     <span
                                                         class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                                                </td>
-                                                <td class="align-middle">
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
-                                                        Edit
-                                                    </a>
                                                 </td>
                                             </tr>
                                             <tr>
@@ -162,13 +141,6 @@
                                                     <span
                                                         class="text-secondary text-xs font-weight-bold">24/12/08</span>
                                                 </td>
-                                                <td class="align-middle">
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
-                                                        Edit
-                                                    </a>
-                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -196,14 +168,6 @@
                                                     <span
                                                         class="text-secondary text-xs font-weight-bold">04/10/21</span>
                                                 </td>
-                                                <td class="align-middle">
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
-                                                        Edit
-                                                    </a>
-                                                </td>
-                                            </tr>
                                             <tr>
                                                 <td>
                                                     <div class="d-flex px-2 py-1">
@@ -231,12 +195,6 @@
                                                         class="text-secondary text-xs font-weight-bold">14/09/20</span>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a href="javascript:;"
-                                                        class="text-secondary font-weight-bold text-xs"
-                                                        data-toggle="tooltip" data-original-title="Edit user">
-                                                        Edit
-                                                    </a>
-                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
