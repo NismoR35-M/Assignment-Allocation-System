@@ -21,11 +21,10 @@
                     <div class="col-auto my-auto">
                         <div class="h-100">
                             <h5 class="mb-1">
-                                {{ auth()->user()->name }}
+                                <!-- {{ auth()->user()->name }} -->
+                                USER PROFILE
                             </h5>
-                            <p class="mb-0 font-weight-normal text-sm">
-                                CEO / Co-Founder
-                            </p>
+                            
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
@@ -107,13 +106,7 @@
                                 @enderror
                                 </div>
                                
-                                <div class="mb-3 col-md-6">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="number" name="phone" class="form-control border border-2 p-2" value='{{ old('phone', auth()->user()->phone) }}'>
-                                    @error('phone')
-                                    <p class='text-danger inputerror'>{{ $message }} </p>
-                                    @enderror
-                                </div>
+                        
                                 
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label">Staff Number</label>
