@@ -12,17 +12,11 @@ class Assignment extends Model
     protected $fillable = [
         'name',
         'request_type',
+        'description',
+        'start_date',
         'company_name',
-        'email',
-        'phone_number',
         'status',
         'is_active',
-    ];
-
-    protected $attribute = ['is_active' => true,];
-  
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 
     public function users()

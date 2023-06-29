@@ -19,9 +19,9 @@ class AssignmentFactory extends Factory
         return [
             'name' => $this->faker->name,
             'request_type' => $this->faker->name,
-            'company_name' => $this->faker->name,
-            'email' => $this->faker->unique()->safeEmail,
-            'phone_number' =>$this ->faker->  phoneNumber,
+            'description' =>  $this->faker->name,
+            'start_date' =>  $this->faker->dateTimeThisYear,
+            'company_name' => $this->faker->streetName,
             'status' => $this ->faker->boolean(100),
             'is_active' => $this ->faker->boolean(80),
         ];
