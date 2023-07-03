@@ -10,4 +10,13 @@ class DashboardController extends Controller
     {
         return view('dashboard.index');
     }
+
+    public function compactTables()
+{
+    // Retrieve assignments data from your database or any other source
+    $assignments = Assignment::all(); // Replace Assignment with your actual model class
+
+    return view('pages.tables', compact('assignments'));
+}
+
 }

@@ -24,7 +24,7 @@ use App\Http\Controllers\SessionsController;
             
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 Route::get('sign-up', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('sign-up', [RegisterController::class, 'store'])->middleware('guest');
 Route::get('sign-in', [SessionsController::class, 'create'])->middleware('guest')->name('login');
@@ -61,3 +61,8 @@ Route::group(['middleware' => 'auth'], function () {
 		return view('pages.laravel-examples.user-profile');
 	})->name('user-profile');
 });
+
+//Assignments
+Route::get('/tables', [AssignmentController::class,'index'])->name('tables');
+Route::patch('/assignments/{id}/status/{status}', [AssignmentController::class, 'update'])->name('update.status');
+Route::get('/assignments/{id}',[AssignmentController::class,'show'])->name('assignment_show');

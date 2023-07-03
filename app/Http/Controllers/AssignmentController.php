@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Assignment;
 use Illuminate\Http\Request;
+use App\Models\Assignment;
 
 class AssignmentController extends Controller
 {
@@ -12,10 +12,13 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        $assignments = Assignment::all(); 
+        $assignments =Assignment::orderBy('created_at', 'desc')->get();
+        $assignment_Count = Assignment::count();
 
-        return view('pages.tables', compact('assignments'));
+        return view('components.pages.tables', compact('assignments', 'assignment_Count'));
     }
+
+    
 
     /**
      * Show the form for creating a new resource.
@@ -36,15 +39,17 @@ class AssignmentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Assignment $assignment)
+    public function show(string $id)
     {
-        //
+        $assignment = Assignment::findorFail($id);
+
+        return view('assignment_show', compact('assignment'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Assignment $assignment)
+    public function edit(string $id)
     {
         //
     }
@@ -52,15 +57,25 @@ class AssignmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Assignment $assignment)
-    {
-        //
+    public function update(Request $request, $id)
+   {
+    $request->validate([
+        'status' => 'required' 
+    ]);
+
+    $assignment = Assignment::findOrFail($id);
+    $assignment->status = $request->input('status');
+    $assignment->save();
+
+      return redirect()->back()->with('success', 'Status updated successfully.');
     }
+
+    
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Assignment $assignment)
+    public function destroy(string $id)
     {
         //
     }
