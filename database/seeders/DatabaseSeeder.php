@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Admin;
 
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +19,6 @@ class DatabaseSeeder extends Seeder
     
         $this->call(AssignmentSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(AdminSeeder::class);
     }
 }

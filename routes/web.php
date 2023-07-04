@@ -75,7 +75,7 @@ Route::middleware(['admin'])->group(function () {
     //Admin Routes
 
     Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
-    Route::post('/admin/login', [AdminController::class, 'store'])->name('admin.login.store');
+    Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.login.store');
 
     // Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
     // Route::put('/admin/update/{id}', [AdminController::class, 'adminUpdate'])->name('admin.profile.update');

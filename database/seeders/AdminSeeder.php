@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 use App\Models\Admin;
 
 class AdminSeeder extends Seeder
@@ -15,13 +16,11 @@ class AdminSeeder extends Seeder
     {
         Admin::factory()-> create([
             'first_name' => 'Beverly',
-            'last_name' => 'Hills',
-            'email' => 'beverleyHills@gmail.com',
-            'password' => ('secret'),
-            'is_active' => (1),
+            'email' => 'beverleyHiii@gmail.com',
+            'password' =>Hash::make('secret'),
+            
         ]);
 
-        Admin::factory() -> count(5) -> create();
     }
 
 }
