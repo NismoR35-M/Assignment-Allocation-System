@@ -37,7 +37,7 @@ class AdminController extends AdminBaseController {
             //     ->log('Admin Login');
 
             // // Redirect to the admin dashboard or any other desired page
-            return redirect() -> route('dashboard');
+            return redirect() -> route('admin.dashboard');
             //return ('SIGN IN SUCCESS');
         }
 
@@ -45,4 +45,27 @@ class AdminController extends AdminBaseController {
         return redirect()->back()->withErrors(['message' => 'Invalid credentials']);
 
     }
+
+    public function dashboard(){
+        return view('admin.adminDashboard');
+    }
+
+    public function create()
+    {
+        return view('admin.profile');
+    }
+
+    public function update()
+    {
+            
+        $admin = request()->user();
+        $attributes = request()->validate([
+            'email' => 'required|email|unique:users,email,'.$admin->id,
+            'name' => 'required',
+        ]);
+
+        auth()->user()->update($attributes);
+        return back()->withStatus('Profile successfully updated.');
+    
+}
 }

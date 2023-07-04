@@ -80,5 +80,8 @@ Route::middleware(['admin'])->group(function () {
     // Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
     // Route::put('/admin/update/{id}', [AdminController::class, 'adminUpdate'])->name('admin.profile.update');
     // //admin dash
-    // Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
+
+Route::get('profile', [AdminController::class, 'create'])->middleware('auth')->name('profile');
+Route::post('admin-profile', [AdminController::class, 'update'])->middleware('auth');
