@@ -66,3 +66,7 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('/tables', [AssignmentController::class,'index'])->name('tables');
 Route::patch('/assignments/{id}/status/{status}', [AssignmentController::class, 'update'])->name('update.status');
 Route::get('/assignments/{id}',[AssignmentController::class,'show'])->name('assignment_show');
+
+Route::get('/tables', [AdminAssignmentController::class,'index'])->name('admin.assignments');
+Route::patch('/assignments/{id}/status/{status}', [AdminAssignmentController::class, 'update'])->name('update.status');
+Route::get('/assignments/{id}',[AdminAssignmentController::class,'show'])->name('assignment_show');
