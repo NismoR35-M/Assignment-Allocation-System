@@ -1,13 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
-use App\Http\Controllers\AdminController;
-
+use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\AdminAssignmentController;
+   
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,8 +23,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-            
+         
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -71,14 +70,9 @@ Route::patch('/assignments/{id}/status/{status}', [AssignmentController::class, 
 Route::get('/assignments/{id}',[AssignmentController::class,'show'])->name('assignment_show');
 
 
-Route::middleware(['admin'])->group(function () {
-    //Admin Routes
-
-    Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
-    Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.login.store');
-
-    // Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
-    // Route::put('/admin/update/{id}', [AdminController::class, 'adminUpdate'])->name('admin.profile.update');
-    // //admin dash
-    // Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-});
+// ADMIN
+// Route to view the details of an assignment
+Route::get('/admin/assignments/{id}', [AdminAssignmentController::class, 'show'])->name('admin_assignments.show');
+// Route to handle the assignment assignment
+Route::post('/admin/assignments/assign', [AdminAssignmentController::class, 'assign'])->name('assign_assignments');
+Route::post('/save-assignment', [AdminAssignmentController::class, 'assignAssignment'])->name('assign_assignment');

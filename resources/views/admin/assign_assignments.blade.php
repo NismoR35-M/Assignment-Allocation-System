@@ -1,95 +1,45 @@
-<x-layout bodyClass="g-sidenav-show  bg-gray-200">
-    <x-navbars.sidebar activePage="tables"></x-navbars.sidebar>
-    <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-        <!-- Navbar -->
-        <x-navbars.navs.auth titlePage="Tables"></x-navbars.navs.auth>
-        <!-- End Navbar -->
-        <div class="container-fluid py-4">
-            <div class="row">
-                 <div class="col-12">
-                    <div class="card my-4">
-                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
-                            <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Project</h6>
-                            </div>
-                        </div>
-                        <div class="card-body px-0 pb-2">
-                            <div class="table-responsive p-0" style="overflow-x: auto;" >
-                                <table class="table table-bordered  align-items-center justify-content-center mb-0">
-                                    
-                                    <tr>
-                                        <th>Id</th>
-                                        <td>{{ $assignment->id }}</td>
-                                    </tr>
+<!-- Your HTML form -->
+<form action="{{ route('assign_assignment') }}" method="POST" enctype="multipart/form-data">
+    @csrf
 
-                                    <tr>
-                                        <th>Name</th>
-                                        <td>{{ $assignment->name }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Organaisation Assigning </th>
-                                        <td>{{ $assignment->company_name}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Type</th>
-                                        <td>{{ $assignment->request_type }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Description</th>
-                                        <td>{{ $assignment->description }}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Preferred Start Date</th>
-                                        <td>{{ $assignment->start_date }}</td>
-                                    </tr>
-                                    <tr>
-                                        <tr>
-                                            <th>Request Letter</th>
-                                            <td>
-                                                @if ($assignment->request)
-                                                    <a href="{{ asset('storage/' . $assignment->request) }}" target="_blank">{{ $assignment->request }}</a>
-                                                @endif
-                                                <input type="file" name="request_file">
-                                            </td>
-                                        </tr>
-                                        
-                                    <tr>
-                                        <th>Status</th>
-                                        <td>
-                                            <form action="{{ route('update.status', ['id' => $assignment->id, 'status' => $assignment->status]) }}" method="POST">
-                                                @method('PATCH')
-                                                @csrf
-                                                <select name="status" class="form-select" onchange="this.form.submit()">
-                                                    <option value="assigned" {{ $assignment->status === 'assigned' ? 'selected' : '' }}>Assigned</option>
-                                                    <option value="not_assigned" {{ $assignment->status === 'not_assigned' ? 'selected' : '' }}>Not Assigned</option>
-                                                </select>
-                                            </form>
-                                        </td>
-                                    </tr>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
 
-                                    <tr>
-                                        <th>Assign To</th>  
-                                        <td>
-                                            @foreach ($users as $user)
-                                            <form action="{{ route('assign_assignments') }}" method="POST">
-                                                @csrf
-                                            
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value="{{ $users->id }}" name="users[]">
-                                                    </div>
-                                                   
-                                                    <td>{{ $user->first_name }}</td>
-                                                    @endforeach
-                                                    <button type="submit">Assign</button>
-                                            </form> 
-                                        </td>                                
-                                    </tr>         
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-            </div>
+    <label for="company_name">Company Name:</label>
+    <input type="text" id="company_name" name="company_name" required>
+
+    <label for="request_type">Request Type:</label>
+    <input type="text" id="request_type" name="request_type" required>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" required></textarea>
+
+    <label for="start_date">Date Received:</label>
+    <input type="status_date" id="start_date" name="start_date" required>
+
+    <label for="status">Status:</label>
+    <select id="status" name="status" required>
+        <option value="assigned">Assigned</option>
+        <option value="not_assigned">Not Assigned</option>
+    </select>
+
+    <label for="request_file">Request File:</label>
+    <input type="file" id="request_file" name="request_file">
+
+    <label for="users_id">Members Assigned:</label>
+    @foreach ($users as $user)
+        <div>
+            <input type="checkbox" id="useer_{{ $user->id }}" name="users_assigned[]" value="{{ $user->id }}">
+            <label for="member_{{ $user->id }}">{{ $user->name }}</label>
         </div>
-    </main>
-</x-layout>
+    @endforeach
+
+    <label for="response">Response:</label>
+    <textarea id="response" name="response"></textarea>
+
+    <label for="response_file">Response File:</label>
+    <input type="file" id="response_file" name="response_file">
+
+
+    <button type="submit">Submit</button>
+</form>
