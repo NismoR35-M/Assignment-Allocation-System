@@ -32,7 +32,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }} "
-                    href="{{ route('dashboard') }}">
+                    href="{{ route('admin.adminDashboard') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">dashboard</i>
                     </div>
@@ -45,9 +45,20 @@
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
-                    <span class="nav-link-text ms-1">Tables</span>
+                    <span class="nav-link-text ms-1">Create Assignment</span>
                 </a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link text-white {{ $activePage == 'tables' ? ' active bg-gradient-primary' : '' }} "
+                    href="{{ route('show_assignments') }}">
+                    <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="material-icons opacity-10">table_view</i>
+                    </div>
+                    <span class="nav-link-text ms-1">Assignments</span>
+                </a>
+            </li>
+            
             
             <li class="nav-item">
                 <a class="nav-link text-white " href="{{ route('static-sign-in') }}">
