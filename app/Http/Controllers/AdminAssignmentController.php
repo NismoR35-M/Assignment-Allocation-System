@@ -1,3 +1,4 @@
+<?php
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
@@ -7,12 +8,10 @@ use Illuminate\Http\Request;
 
 class AdminAssignmentController extends Controller
 {
-    public function show($id)
+    public function show()
     {
-        $assignment = Assignment::findOrFail($id);
-        $users = User::all();
 
-        return view('admin_assignments.show', compact('assignment', 'users'));
+        return view('admin.assign_assignments');
     }
 
     public function assign(Request $request)

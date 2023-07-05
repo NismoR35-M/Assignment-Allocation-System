@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminAssignmentController;
    
 /*
@@ -86,7 +87,6 @@ Route::get('profile', [AdminController::class, 'create'])->middleware('auth')->n
 Route::post('admin-profile', [AdminController::class, 'update'])->middleware('auth');
 // ADMIN
 // Route to view the details of an assignment
-Route::get('/admin/assignments/{id}', [AdminAssignmentController::class, 'show'])->name('admin_assignments.show');
-// Route to handle the assignment assignment
+Route::get('/admin/assignments', [AdminAssignmentController::class, 'show'])->name('admin_assignments.show');
 Route::post('/admin/assignments/assign', [AdminAssignmentController::class, 'assign'])->name('assign_assignments');
 Route::post('/save-assignment', [AdminAssignmentController::class, 'assignAssignment'])->name('assign_assignment');
