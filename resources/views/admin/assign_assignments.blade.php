@@ -45,12 +45,7 @@
                                         <input type="file" id="request_file" name="request_file">
 
                                         <label for="users_id">Members Assigned:</label>
-                                        <!-- @foreach ($users as $user)
-                                            <div>
-                                                <input type="checkbox" id="useer_{{ $user->id }}" name="users_assigned[]" value="{{ $user->id }}">
-                                                <label for="member_{{ $user->id }}">{{ $user->name }}</label>
-                                            </div>
-                                        @endforeach -->
+                    
 
                                         <label for="response">Response:</label>
                                         <textarea id="response" name="response"></textarea>
