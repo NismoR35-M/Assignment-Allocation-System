@@ -14,6 +14,12 @@ class AdminAssignmentController extends Controller
         return view('admin.assign_assignments');
     }
 
+    public function shows()
+    {
+
+        return view('admin.Assignments');
+    }
+
     public function assign(Request $request)
     {
         $assignment = Assignment::findOrFail($request->input('assignment_id'));

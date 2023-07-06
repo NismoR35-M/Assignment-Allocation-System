@@ -19,31 +19,42 @@
                                 <table class="table table-bordered  align-items-center justify-content-center mb-0">
                                     <form action="{{ route('assign_assignment') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
+                                        <tr>
                                         <td>
                                         <label for="name">Name:</label>
                                         <input type="text" id="name" name="name" required>
                                         </td>
+                                        </tr>
 
+                                        <tr>
                                         <td>
                                         <label for="company_name">Company Name:</label>
                                         <input type="text" id="company_name" name="company_name" required>
                                         </td>
+                                        </tr>
 
+                                        <tr>
                                         <td>
                                         <label for="request_type">Request Type:</label>
                                         <input type="text" id="request_type" name="request_type" required>
                                         </td>
+                                        </tr>
 
+                                        <tr>
                                         <td>
                                         <label for="description">Description:</label>
                                         <textarea id="description" name="description" required></textarea>
                                         </td>
+                                        </tr>
 
+                                        <tr>
                                         <td>
                                         <label for="start_date">Date Received:</label>
                                         <input type="status_date" id="start_date" name="start_date" required>
                                         </td>
+                                        </tr>
 
+                                        <tr>
                                         <td>
                                         <label for="status">Status:</label>
                                         <select id="status" name="status" required>
@@ -51,12 +62,16 @@
                                             <option value="not_assigned">Not Assigned</option>
                                         </select>
                                         </td>
+                                        </tr>
 
+                                        <tr>
                                         <td>
                                         <label for="request_file">Request File:</label>
                                         <input type="file" id="request_file" name="request_file">
                                         </td>
+                                        </tr>
 
+                                        <tr>
                                         <td>
                                         <label for="users_id">Members Assigned:</label>
                                         {{-- <!-- @foreach ($users as $user)
@@ -71,14 +86,17 @@
                                         <label for="response">Response:</label>
                                         <textarea id="response" name="response"></textarea>
                                         </td>
+                                        </tr>
 
+                                        <tr>
                                         <td>
                                         <label for="response_file">Response File:</label>
                                         <input type="file" id="response_file" name="response_file">
                                         </td>
+                                        </tr>
 
 
-                                        <button type="submit">Submit</button>
+                                        <button type="submit">Create Assignment</button>
                                     </form>
                                 </table>
                             </div>

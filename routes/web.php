@@ -90,3 +90,5 @@ Route::post('admin-profile', [AdminController::class, 'update'])->middleware('au
 Route::get('/admin/assignments', [AdminAssignmentController::class, 'show'])->name('admin_assignments.show');
 Route::post('/admin/assignments/assign', [AdminAssignmentController::class, 'assign'])->name('assign_assignments');
 Route::post('/save-assignment', [AdminAssignmentController::class, 'assignAssignment'])->name('assign_assignment');
+
+Route::get('/admin/view/assignments', [AdminAssignmentController::class, 'shows'])->name('show_assignments');
