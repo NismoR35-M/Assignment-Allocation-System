@@ -78,6 +78,8 @@ class AdminAssignmentController extends Controller
 
         // Save the Assignment instance to the database
         $assignment->save();
+        $userIds = $request -> input('user');
+        $assignment -> users()->attach($userIds);
         $assignment->users()->sync($validatedData['user']);
         // Redirect or perform any other actions after saving the assignment
         return view('admin.assign_assignments', compact('users'))->with('success', 'Assignment saved successfully!');

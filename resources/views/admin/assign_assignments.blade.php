@@ -77,7 +77,7 @@
                                                 @foreach($users as $user)
                                                     <div>
                                                         <input type="checkbox" id="user{{ $user->id }}" name="user[]" value="{{ $user->id }}">
-                                                        <label for="user{{ $user->id }}">{{ $user->firstname }} {{ $user->lastname }} {{ $user->staffnumber }}</label>
+                                                        <label for="user{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }} {{ $user->staff_number }}</label>
                                                     </div>
                                                 @endforeach
                                             </div>
