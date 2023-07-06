@@ -92,3 +92,8 @@ Route::post('/admin/assignments/assign', [AdminAssignmentController::class, 'ass
 Route::post('/save-assignment', [AdminAssignmentController::class, 'assignAssignment'])->name('assign_assignment');
 Route::get('/admin/assignments', [AdminAssignmentController::class, 'shows'])->name('show_assignments');
 Route::get('/admin/view/members', [AdminAssignmentController::class, 'show_users'])->name('show_users');
+
+Route::get('users/create', [AdminAssignmentController::class, 'createForm'])->name('admin.addUser');
+Route::post('users/create', [AdminAssignmentController::class, 'createUser'])->name('admin.users.save');
+Route::delete('users/{id}', [AdminAssignmentController::class, 'deleteUser'])->name('admin.users.delete');
+
