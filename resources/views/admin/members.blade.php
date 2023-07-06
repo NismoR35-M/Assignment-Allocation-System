@@ -46,12 +46,21 @@
                                          <td>{{$user->staff_number }}</td>
                                          <td>{{$user->email }}</td>
                                          <td>{{$user->response }}</td>
-                                         <td>
+                                         <td> 
+                                            <form action="{{ route('admin.users.delete', $user->id) }}" method="POST" style="display:inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                    <button class="btn btn-dark">{{ __('Delete') }}</button>
+                                            </form>
+                                         </td>
                                       </tr>
                                      @endforeach
                                     </tbody>
+                                    <td>
                             </table>
-
+                            <a href="{{ route('admin.addUser') }}">
+                                <button type="button" class="btn btn-dark">{{ __('Create New Member') }}</button>
+                                </a>
                        </div>
                     </div>
                 </div>
