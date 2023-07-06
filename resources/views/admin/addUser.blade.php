@@ -36,11 +36,16 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label for="email">Password</label>
+                                        <input type="text" name="email" id="email" required>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label for="password">Password</label>
                                         <input type="text" name="password" id="password" required>
                                     </div>
 
-                                    <button type="submit">Create User</button>
+                                    <button type="button" class="btn btn-dark">Create User</button>
                             </form>   
                                 </table>
                             </div>
