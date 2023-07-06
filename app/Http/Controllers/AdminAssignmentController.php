@@ -8,16 +8,25 @@ use Illuminate\Http\Request;
 
 class AdminAssignmentController extends Controller
 {
-    public function show()
+    public function create()
     {
-
-        return view('admin.assign_assignments');
+        $users = User::all();
+        return view('admin.assign_assignments', compact('users'));
     }
 
     public function shows()
     {
+        $assignments = Assignment::all(); // Replace `Assignment` with your actual model name
 
-        return view('admin.Assignments');
+
+        return view('admin.Assignments', compact('assignments'));
+    }
+
+    public function show_users()
+    {
+
+        $users = User::all();
+        return view('admin.members', compact('users'));
     }
 
     public function assign(Request $request)
@@ -67,10 +76,9 @@ class AdminAssignmentController extends Controller
 
         // Save the Assignment instance to the database
         $assignment->save();
-
+        $assignment->users()->sync($validatedData['user']);
         // Redirect or perform any other actions after saving the assignment
-
+        return view('admin.assign_assignments', compact('users'))->with('success', 'Assignment saved successfully!');
         // Return a response
-        return redirect()->back()->with('success', 'Assignment saved successfully!');
     }
 }

@@ -52,8 +52,7 @@
                                             <input type="file" name="request_file">
                                         </td>
                                     </tr>
-                                   
-
+                                
 
                                     <tr>        
                                         <th> Response </th>
@@ -77,14 +76,7 @@
                                             </form>
                                         </td>
                                     </tr>
-                                    <tr> 
-                                        <th> Members Assigned </th>
-                                        <td> 
-                                            @foreach ($assignment->$users as $user)
-                                                {{ $user->id }}
-                                            @endforeach
-                                        </td>
-                                    </tr>
+
                                 </table>
                             </div>
                         </div>

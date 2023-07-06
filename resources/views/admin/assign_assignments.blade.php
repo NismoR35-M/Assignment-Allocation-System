@@ -50,20 +50,10 @@
                                         <tr>
                                         <td>
                                         <label for="start_date">Date Received:</label>
-                                        <input type="status_date" id="start_date" name="start_date" required>
+                                        <input type="date" id="datereceived" name="datereceived" required>
                                         </td>
                                         </tr>
-
-                                        <tr>
-                                        <td>
-                                        <label for="status">Status:</label>
-                                        <select id="status" name="status" required>
-                                            <option value="assigned">Assigned</option>
-                                            <option value="not_assigned">Not Assigned</option>
-                                        </select>
-                                        </td>
-                                        </tr>
-
+                                        
                                         <tr>
                                         <td>
                                         <label for="request_file">Request File:</label>
@@ -71,30 +61,28 @@
                                         </td>
                                         </tr>
 
+
                                         <tr>
-                                        <td>
-                                        <label for="users_id">Members Assigned:</label>
-                                        {{-- <!-- @foreach ($users as $user)
-                                            <div>
-                                                <input type="checkbox" id="useer_{{ $user->id }}" name="users_assigned[]" value="{{ $user->id }}">
-                                                <label for="member_{{ $user->id }}">{{ $user->name }}</label>
+                                        <td>  
+                                        <div>
+                                            <label for="status">Status:</label>
+                                            <select id="status" name="status" required>
+                                                <option value="assigned">Select status</option>
+                                                <option value="assigned">Assigned</option>
+                                                <option value="unassigned">Unassigned</option>
+                                            </select>         
+                                        <div id="userDropdown" style="display: none;">
+                                            <label for="user">Assigned Users:</label>
+                                            <div id="userCheckboxes">
+                                                @foreach($users as $user)
+                                                    <div>
+                                                        <input type="checkbox" id="user{{ $user->id }}" name="user[]" value="{{ $user->id }}">
+                                                        <label for="user{{ $user->id }}">{{ $user->firstname }} {{ $user->lastname }} {{ $user->staffnumber }}</label>
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                        @endforeach --> --}}
-
-
-                                        <td>
-                                        <label for="response">Response:</label>
-                                        <textarea id="response" name="response"></textarea>
                                         </td>
                                         </tr>
-
-                                        <tr>
-                                        <td>
-                                        <label for="response_file">Response File:</label>
-                                        <input type="file" id="response_file" name="response_file">
-                                        </td>
-                                        </tr>
-
 
                                         <button type="submit">Create Assignment</button>
                                     </form>
@@ -102,8 +90,23 @@
                             </div>
                         </div>
                     </div>
-                 </div>
+                </div>
             </div>
         </div>
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var statusSelect = document.getElementById('status');
+            var userDropdown = document.getElementById('userDropdown');
+
+            statusSelect.addEventListener('change', function() {
+                if (statusSelect.value === 'assigned') {
+                    userDropdown.style.display = 'block';
+                } else {
+                    userDropdown.style.display = 'none';
+                }
+            });
+        });
+    </script>
 </x-layout>

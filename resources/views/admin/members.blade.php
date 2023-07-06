@@ -2,7 +2,7 @@
     <x-navbars.admin_side_bar activePage="tables"></x-navbars.admin_side_bar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <!-- Navbar -->
-        <x-navbars.navs.auth titlePage="Assignments"></x-navbars.navs.auth>
+        <x-navbars.navs.auth titlePage="Members"></x-navbars.navs.auth>
         <!-- End Navbar -->
         <div class="container-fluid py-4">
             <div class="row">
@@ -14,7 +14,7 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h6 class="text-white text-capitalize ps-3">Assignments table</h6>
+                                <h6 class="text-white text-capitalize ps-3">Members</h6>
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
@@ -28,16 +28,24 @@
                                                First Name</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                Last Name</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                               Staff Number</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                               Email</th>
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                               Response</th>
 
                                         </tr>
                                     </thead>
                                     <tbody>
                                      @foreach ($users as $user)
                                       <tr>
-                                         <td>{{$users->id}}</td>
-                                         <td>{{$users->name }}</td>
-                                         <td>{{$users->first_name }}</td>
-                                         <td>{{$users->last_name }}</td>
+                                         <td>{{$user->id}}</td>
+                                         <td>{{$user->first_name }}</td>
+                                         <td>{{$user->last_name }}</td>
+                                         <td>{{$user->staff_number }}</td>
+                                         <td>{{$user->email }}</td>
+                                         <td>{{$user->response }}</td>
                                          <td>
                                       </tr>
                                      @endforeach
@@ -48,7 +56,6 @@
                     </div>
                 </div>
             </div>
-            <x-footers.auth></x-footers.auth>
         </div>
     </main>
 </x-layout>
