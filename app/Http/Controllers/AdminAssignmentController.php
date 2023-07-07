@@ -124,6 +124,16 @@ public function createForm()
         } else {
             return redirect()->back()->with('error', 'Failed to delete Student record!!!');
         }
-}
+    }
+
+    public function count()
+    {
+        $assignedCount = Assignment::where('status', 'assigned')->count();
+        $notAssignedCount = Assignment::where('status', 'unassigned')->count();
+        $inProgressCount = Assignment::where('status', 'InProgress')->count();
+        $completedCount = Assignment::where('status', 'Completed')->count();
+
+        return view('admin.adminDashboard', compact('assignedCount', 'notAssignedCount', 'inProgressCount', 'completedCount'));
+    }
 
 }

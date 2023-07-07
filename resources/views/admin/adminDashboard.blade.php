@@ -14,7 +14,7 @@
                                 <i class="material-icons opacity-10">weekend</i>
                             </div>
                             <div class="text-end pt-1">
-                                <p class="text-sm mb-0 text-capitalize">Today's Money</p>
+                                <p class="text-sm mb-0 text-capitalize">Assigned Assignments</p>
                                 <h4 class="mb-0">$53k</h4>
                             </div>
                         </div>
@@ -44,6 +44,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
@@ -63,6 +65,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-xl-3 col-sm-6">
                     <div class="card">
                         <div class="card-header p-3 pt-2">
@@ -83,6 +87,8 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="row mt-4">
                 <div class="col-lg-4 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2 ">
@@ -104,6 +110,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="col-lg-4 col-md-6 mt-4 mb-4">
                     <div class="card z-index-2  ">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 bg-transparent">
@@ -146,6 +154,8 @@
                     </div>
                 </div>
             </div>
+
+            
             <div class="row mb-4">
                 <div class="col-lg-8 col-md-6 mb-md-0 mb-4">
                     <div class="card">
@@ -177,6 +187,8 @@
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive">
                                 <table class="table align-items-center mb-0">
