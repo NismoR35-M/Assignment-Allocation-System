@@ -16,10 +16,14 @@ class AdminSeeder extends Seeder
     {
         Admin::factory()-> create([
             'first_name' => 'Beverly',
+            'last_name' => 'Kay',
             'email' => 'beverleyHiii@gmail.com',
             'password' =>Hash::make('secret'),
+            'is_active' => (1),
             
         ]);
+
+        Admin::factory()->count(2)->create();
 
     }
 

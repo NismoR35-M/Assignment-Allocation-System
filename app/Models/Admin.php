@@ -10,7 +10,7 @@ class Admin extends Model implements Authenticatable
 {
     use HasFactory;
 
-    protected $table='admins';
+    protected $table='admin';
 
     protected $fillable=[
         'first_name',

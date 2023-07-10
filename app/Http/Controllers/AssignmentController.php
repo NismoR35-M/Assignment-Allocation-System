@@ -16,7 +16,7 @@ class AssignmentController extends Controller
         $assignments =Assignment::orderBy('created_at', 'desc')->get();
         $assignment_Count = Assignment::count();
 
-        return view('components.pages.tables', compact('assignments', 'assignment_Count'));
+        return view('pages.tables', compact('assignments', 'assignment_Count'));
     }
 
     
