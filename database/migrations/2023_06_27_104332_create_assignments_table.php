@@ -17,8 +17,11 @@ return new class extends Migration
             $table->string('request_type');
             $table->string('description'); 
             $table->string('start_date');
+            $table->string('end_date');
             $table->string('company_name');
-            $table->boolean('status')->default('0');
+            $table->string('request');
+            $table->string('response');
+            $table->enum('status', ['Assigned', 'Unassigned', 'In Progress', 'Completed']);
             $table->boolean('is_active')->default('1');
             $table->timestamps();
         });
