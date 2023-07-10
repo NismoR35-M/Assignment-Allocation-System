@@ -9,4 +9,11 @@ use Illuminate\Routing\Controller as BaseController;
 class AdminBaseController extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    public function __construct()
+    {
+        $this->middleware('web');
+        $this->middleware('admin');
+    }
 }
+

@@ -71,7 +71,7 @@ Route::patch('/assignments/{id}/status/{status}', [AssignmentController::class, 
 Route::get('/assignments/{id}',[AssignmentController::class,'show'])->name('assignment_show');
 
 
-Route::middleware(['admin'])->group(function () {
+Route::middleware(['web', 'admin'])->group(function () {
     //Admin Routes
 
     Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
