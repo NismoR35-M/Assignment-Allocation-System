@@ -45,7 +45,7 @@
                                         <input type="text" name="password" id="password" required>
                                     </div>
 
-                                    <button type="button" class="btn btn-dark">Create User</button>
+                                    <button type="submit" class="btn btn-dark">Create User</button>
                             </form>   
                                 </table>
                             </div>

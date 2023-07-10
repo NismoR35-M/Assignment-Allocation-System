@@ -21,8 +21,11 @@ class AssignmentFactory extends Factory
             'request_type' => $this->faker->name,
             'description' =>  $this->faker->name,
             'start_date' =>  $this->faker->dateTimeThisYear,
+            'end_date' =>  $this->faker->dateTimeThisYear,
             'company_name' => $this->faker->streetName,
-            'status' => $this ->faker->boolean(100),
+            'request' => $this->faker->text,
+            'response' => $this-> faker -> text,
+            'status' => $this->faker->randomElement(['Assigned', 'Unassigned', 'InProgress', 'Completed']),
             'is_active' => $this ->faker->boolean(80),
         ];
     }

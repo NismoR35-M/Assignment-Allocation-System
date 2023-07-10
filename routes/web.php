@@ -8,6 +8,7 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminAssignmentController;
+use App\Http\Controllers\GraphController;
    
 /*
 |--------------------------------------------------------------------------
@@ -97,3 +98,4 @@ Route::get('users/create', [AdminAssignmentController::class, 'createForm'])->na
 Route::post('users/create', [AdminAssignmentController::class, 'createUser'])->name('admin.users.save');
 Route::delete('users/{id}', [AdminAssignmentController::class, 'deleteUser'])->name('admin.users.delete');
 
+Route::get('/member-activity', [GraphController::class, 'memberActivity'])->name('member_activity');

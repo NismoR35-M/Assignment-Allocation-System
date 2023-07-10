@@ -100,7 +100,7 @@ public function createForm()
             'email' => 'required|email',
             'password' => 'required',
         ]);
-    
+
         $user = new User();
         $user->first_name = $validatedData['first_name'];
         $user->last_name = $validatedData['last_name'];
@@ -110,7 +110,7 @@ public function createForm()
         $user->save();
     
         // Redirect to the appropriate page or show a success message
-        return redirect()->route('admin.members')->with('success', 'User created successfully');
+        return redirect()->route('show_users')->with('success', 'User created successfully');
     }
 
     public function deleteUser($id)
@@ -124,16 +124,6 @@ public function createForm()
         } else {
             return redirect()->back()->with('error', 'Failed to delete Student record!!!');
         }
-    }
-
-    public function count()
-    {
-        $assignedCount = Assignment::where('status', 'assigned')->count();
-        $notAssignedCount = Assignment::where('status', 'unassigned')->count();
-        $inProgressCount = Assignment::where('status', 'InProgress')->count();
-        $completedCount = Assignment::where('status', 'Completed')->count();
-
-        return view('admin.adminDashboard', compact('assignedCount', 'notAssignedCount', 'inProgressCount', 'completedCount'));
     }
 
 }

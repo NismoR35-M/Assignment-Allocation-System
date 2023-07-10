@@ -7,6 +7,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\View\View;
 use AuthenticatesAdmins;
 use Spatie\Activitylog\Models\Activity;
+use App\Models\Assignment;
 
 
 class AdminController extends AdminBaseController {
@@ -47,7 +48,13 @@ class AdminController extends AdminBaseController {
     }
 
     public function dashboard(){
-        return view('admin.adminDashboard');
+
+        $assignedCount = Assignment::where('status', 'assigned')->count();
+        $notAssignedCount = Assignment::where('status', 'unassigned')->count();
+        $inProgressCount = Assignment::where('status', 'InProgress')->count();
+        $completedCount = Assignment::where('status', 'Completed')->count();
+
+        return view('admin.adminDashboard', compact('assignedCount', 'notAssignedCount', 'inProgressCount', 'completedCount'));
     }
 
     public function create()
