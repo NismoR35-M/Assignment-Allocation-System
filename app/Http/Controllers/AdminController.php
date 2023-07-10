@@ -59,7 +59,7 @@ class AdminController extends AdminBaseController {
 
     public function create()
     {
-        return view('admin.profile');
+        return view('admin.adminProfile');
     }
 
     public function update()

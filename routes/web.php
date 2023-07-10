@@ -77,6 +77,8 @@ Route::middleware(['web', 'admin'])->group(function () {
 
     Route::get('/admin/login', [AdminController::class, 'login'])->name('admin.login');
     Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.login.store');
+	Route::get('/admin/profile', [AdminController::class, 'create'])->name('admin.profile');
+	Route::post('/admin/profile', [AdminController::class, 'update'])->name('admin.postProfile');
 
     // Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
     // Route::put('/admin/update/{id}', [AdminController::class, 'adminUpdate'])->name('admin.profile.update');
@@ -84,8 +86,7 @@ Route::middleware(['web', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
 
-Route::get('profile', [AdminController::class, 'create'])->middleware('auth')->name('profile');
-Route::post('admin-profile', [AdminController::class, 'update'])->middleware('auth');
+
 // ADMIN
 // Route to view the details of an assignment
 Route::get('/admin/viewAssignments', [AdminAssignmentController::class, 'create'])->name('create_assignment');
