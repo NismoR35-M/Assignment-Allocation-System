@@ -14,17 +14,17 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        Admin::factory()-> create([
+        Admin::firstOrCreate([
+            'email' => 'beverleyHiii@gmail.com',
+        ], [
             'first_name' => 'Beverly',
             'last_name' => 'Kay',
-            'email' => 'beverleyHiii@gmail.com',
-            'password' =>Hash::make('secret'),
-            'is_active' => (1),
-            
+            'password' => Hash::make('secret'),
+            'is_active' => 1,
         ]);
 
-        Admin::factory()->count(2)->create();
-
+        Admin::factory()->count(8)->create();
     }
 
 }
+

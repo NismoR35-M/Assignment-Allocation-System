@@ -60,8 +60,8 @@ class AdminAssignmentController extends Controller
        
         dd($validatedData);
 
-        // Create a new Assignment instance
-        $assignment = new Assignment();
+    // Create a new Assignment instance
+    $assignment = new Assignment();
 
         // Assign form data to the Assignment instance
         $assignment->name = $request->input('name');
@@ -72,12 +72,12 @@ class AdminAssignmentController extends Controller
         $assignment->status = $request->input('status');
         $assignment->response = $request->input('response');
 
-        // Upload and store the response file, if provided
-        if ($request->hasFile('response_file')) {
-            $file = $request->file('response_file');
-            $path = $file->store('response_files', 'public');
-            $assignment->response_file = $path;
-        }
+    // Upload and store the response file, if provided
+    if ($request->hasFile('response_file')) {
+        $file = $request->file('response_file');
+        $path = $file->store('response_files', 'public');
+        $assignment->response_file = $path;
+    }
 
         // Save the Assignment instance to the database
         $assignment->save();
