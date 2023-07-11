@@ -12,7 +12,7 @@
         </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-900" id="sidenav-collapse-main">
+    <div class="sidenav-main" id="sidenav-main">
         <ul class="navbar-nav">
             <li class="nav-item">
                 <a class="nav-link text-white {{ $activePage == 'user-profile' ? 'active bg-gradient-primary' : '' }} "

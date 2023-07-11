@@ -44,7 +44,7 @@ class AdminAssignmentController extends Controller
 
         public function assignAssignment(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         // Validate the form data
         $validatedData = $request->validate([
             'name' => 'required',
@@ -58,7 +58,7 @@ class AdminAssignmentController extends Controller
             'users' => 'required|array', // Assuming the input name for users is 'users'
         ]);
        
-        dd($validatedData);
+        //dd($validatedData);
 
     // Create a new Assignment instance
     $assignment = new Assignment();
