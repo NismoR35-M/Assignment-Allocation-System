@@ -11,11 +11,12 @@ class Assignment extends Model
 
     protected $fillable = [
         'name',
+        'company_name',
         'request_type',
         'description',
         'start_date',
-        'company_name',
         'status',
+        'response',
         'is_active',
     ];
 

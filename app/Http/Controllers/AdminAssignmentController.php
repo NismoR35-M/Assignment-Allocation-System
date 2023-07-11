@@ -44,6 +44,7 @@ class AdminAssignmentController extends Controller
 
         public function assignAssignment(Request $request)
     {
+        dd($request->all());
         // Validate the form data
         $validatedData = $request->validate([
             'name' => 'required',
@@ -56,7 +57,8 @@ class AdminAssignmentController extends Controller
             'response_file' => 'nullable|file',
             'users' => 'required|array', // Assuming the input name for users is 'users'
         ]);
-        dd($request->all());
+       
+        dd($validatedData);
 
         // Create a new Assignment instance
         $assignment = new Assignment();
