@@ -15,7 +15,7 @@
                         </div>
                         <div class="card-body px-0 pb-2">
                             <div class="table-responsive p-0">
-                                <table class="table table-bordered  align-items-center justify-content-center mb-0">
+                                <table class="table table-bordered align-items-center justify-content-center mb-0">
                                     <thead>
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Id</th>
@@ -30,27 +30,27 @@
                                         <tr>
                                             <td>{{$assignment->id}}</td>
                                             <td>{{$assignment->name}}</td>
-                                            <td>{{$assignment->type}}</td>
+                                            <td>{{$assignment->request_type}}</td>
                                             <td>
-                                                @if($assignment->status == 'InProgress')
-                                                <span class="badge bg-warning">InProgress</span>
+                                                @if($assignment->status == 'assigned')
+                                                <span class="badge bg-warning">Assigned</span>
+                                                @elseif($assignment->status == 'unassigned')
+                                                <span class="badge bg-primary">Unassigned</span>
+                                                @elseif($assignment->status == 'InProgress')
+                                                <span class="badge bg-info">In Progress</span>
                                                 @elseif($assignment->status == 'Completed')
                                                 <span class="badge bg-success">Completed</span>
                                                 @endif
                                             </td>
-                                            
-                                        
                                             <td>
-                                                <a href ="{{route('assignment_show',$assignment->id)}}">
-                                                 <button type="button" class="btn btn-dark">View Details</button>
+                                                <a href="{{route('assignment_show', $assignment->id)}}">
+                                                    <button type="button" class="btn btn-dark">View Details</button>
                                                 </a>
                                             </td>
-
-                                           
                                         </tr>
                                         @endforeach
                                     </tbody>
-                                </table>
+                                </table>                                
                             </div>
                         </div>
                     </div>
