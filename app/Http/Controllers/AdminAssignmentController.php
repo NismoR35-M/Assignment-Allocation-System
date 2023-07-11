@@ -31,34 +31,33 @@ class AdminAssignmentController extends Controller
         return view('admin.members', compact('users'));
     }
 
-    public function assign(Request $request)
-    {
-        $assignment = Assignment::findOrFail($request->input('assignment_id'));
-        $userIds = $request->input('users');
-        $users = User::whereIn('id', $userIds)->get();
+    // public function assign(Request $request)
+    // {
+    //     $assignment = Assignment::findOrFail($request->input('assignment_id'));
+    //     $userIds = $request->input('users');
+    //     $users = User::whereIn('id', $userIds)->get();
 
-        $assignment->users()->attach($users);
+    //     $assignment->users()->attach($users);
 
-        return redirect()->back()->with('status', 'Assignment assigned successfully.');
-    }
+    //     return redirect()->back()->with('status', 'Assignment assigned successfully.');
+    // }
 
         public function assignAssignment(Request $request)
     {
-        dd($request->all());
+     
         // Validate the form data
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'company_name' => 'required',
-            'request_type' => 'required',
-            'description' => 'required',
-            'start_date' => 'required',
-            'status' => 'required',
-            'response' => 'nullable',
-            'response_file' => 'nullable|file',
-            'users' => 'required|array', // Assuming the input name for users is 'users'
-        ]);
-       
-        dd($validatedData);
+        // $validatedData = $request->validate([
+        //     'name' => 'required',
+        //     'company_name' => 'required',
+        //     'request_type' => 'required',
+        //     'description' => 'required',
+        //     'start_date' => 'required',
+        //     'status' => 'required',
+        //     'response' => 'nullable',
+        //     'response_file' => 'nullable|file',
+        //     'users' => 'required|array', // Assuming the input name for users is 'users'
+        // ]);
+    
 
     // Create a new Assignment instance
     $assignment = new Assignment();
@@ -81,10 +80,10 @@ class AdminAssignmentController extends Controller
 
         // Save the Assignment instance to the database
         $assignment->save();
-
+        // $assignment->users()->sync($validatedData['user']);
         // Assign users to the assignment
-        $userIds = $validatedData['users'];
-        $assignment->users()->attach($userIds);
+        // $userIds = $validatedData['users'];
+        // $assignment->users()->attach($userIds);
 
         // Redirect or perform any other actions after saving the assignment
         return redirect()->route('show_assignments')->with('success', 'Assignment saved successfully!');

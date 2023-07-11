@@ -47,11 +47,13 @@
                                          <td>{{ $assignment->company_name }}</td>
                                          <td>{{ $assignment->status }}</td>
                                          <td>
+                                            @if($assignment->status === 'assigned')
                                              <select>
                                                  @foreach($assignment->users as $user)
                                                      <option>{{ $user->first_name }} {{ $user->last_name }}</option>
                                                  @endforeach
                                              </select>
+                                            @endif
                                          </td>
                                       </tr>
                                      @endforeach

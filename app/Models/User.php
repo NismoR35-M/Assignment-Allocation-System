@@ -60,9 +60,9 @@ class User extends Authenticatable
         return $this->belongsToMany(Assignment::class, 'junctions', 'users_id', 'assignments_id');
     }
 
-    public function userassignments()
-    {
-        return $this->hasMany(Junction::class, 'users_id');
-    } 
+    // public function userassignments()
+    // {
+    //     return $this->hasMany(Junction::class, 'users_id');
+    // } 
 
 }

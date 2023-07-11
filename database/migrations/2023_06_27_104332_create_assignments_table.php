@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('request_type');
             $table->string('description'); 
             $table->string('start_date');
-            $table->string('end_date');
+            //$table->string('end_date');
             $table->string('company_name');
             $table->string('request');
             $table->string('response');
