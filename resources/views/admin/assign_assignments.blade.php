@@ -82,11 +82,15 @@
                                                 @endforeach
                                             </div>
                                         </td>
+                                        </tr>  
+                                        <tr>
+                                            <td>
+                                                <button type="submit" class="btn btn-dark">Create Assignment</button>
+                                            </td>
                                         </tr>
-
-                                        <button type="submit">Create Assignment</button>
                                     </form>
                                 </table>
+                               
                             </div>
                         </div>
                     </div>

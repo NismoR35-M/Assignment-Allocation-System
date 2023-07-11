@@ -42,7 +42,7 @@ class AdminAssignmentController extends Controller
         return redirect()->back()->with('status', 'Assignment assigned successfully.');
     }
 
-    public function assignAssignment(Request $request)
+        public function assignAssignment(Request $request)
     {
         // Validate the form data
         $validatedData = $request->validate([
@@ -54,13 +54,14 @@ class AdminAssignmentController extends Controller
             'status' => 'required',
             'response' => 'nullable',
             'response_file' => 'nullable|file',
+            'users' => 'required|array', // Assuming the input name for users is 'users'
         ]);
+        dd($request->all());
 
         // Create a new Assignment instance
         $assignment = new Assignment();
 
         // Assign form data to the Assignment instance
-
         $assignment->name = $request->input('name');
         $assignment->company_name = $request->input('company_name');
         $assignment->request_type = $request->input('request_type');
@@ -78,12 +79,13 @@ class AdminAssignmentController extends Controller
 
         // Save the Assignment instance to the database
         $assignment->save();
-        $userIds = $request -> input('user');
-        $assignment -> users()->attach($userIds);
-        $assignment->users()->sync($validatedData['user']);
+
+        // Assign users to the assignment
+        $userIds = $validatedData['users'];
+        $assignment->users()->attach($userIds);
+
         // Redirect or perform any other actions after saving the assignment
-        return view('admin.assign_assignments', compact('users'))->with('success', 'Assignment saved successfully!');
-        // Return a response
+        return redirect()->route('show_assignments')->with('success', 'Assignment saved successfully!');
     }
 
 
