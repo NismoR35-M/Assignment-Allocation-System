@@ -44,20 +44,21 @@ class AdminAssignmentController extends Controller
 
         public function assignAssignment(Request $request)
     {
-     
+        dd($request->all());
         // Validate the form data
-        // $validatedData = $request->validate([
-        //     'name' => 'required',
-        //     'company_name' => 'required',
-        //     'request_type' => 'required',
-        //     'description' => 'required',
-        //     'start_date' => 'required',
-        //     'status' => 'required',
-        //     'response' => 'nullable',
-        //     'response_file' => 'nullable|file',
-        //     'users' => 'required|array', // Assuming the input name for users is 'users'
-        // ]);
-    
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'company_name' => 'required',
+            'request_type' => 'required',
+            'description' => 'required',
+            'start_date' => 'required',
+            'status' => 'required',
+            'response' => 'nullable',
+            'response_file' => 'nullable|file',
+            'users' => 'required|array', // Assuming the input name for users is 'users'
+        ]);
+       
+        dd($validatedData);
 
     // Create a new Assignment instance
     $assignment = new Assignment();
