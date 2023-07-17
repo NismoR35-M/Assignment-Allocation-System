@@ -18,6 +18,9 @@ class Assignment extends Model
         'status',
         'response',
         'is_active',
+        'latest_message_id',
+        'is_read',
+        'is_admin_reply',
     ];
 
     public function users()
