@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -9,6 +8,7 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminAssignmentController;
 use App\Http\Controllers\GraphController;
+use App\Http\Controllers\MailController;
    
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +22,11 @@ use App\Http\Controllers\GraphController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+   
+
+	\Illuminate\Support\Facades\Mail::send(new \App\Mail\Assignment_Assigned());
+
+	return view('welcome');
 });
 
          
@@ -99,4 +103,10 @@ Route::get('users/create', [AdminAssignmentController::class, 'createForm'])->na
 Route::post('users/create', [AdminAssignmentController::class, 'createUser'])->name('admin.users.save');
 Route::delete('users/{id}', [AdminAssignmentController::class, 'deleteUser'])->name('admin.users.delete');
 
+Route::get('viewtaskdetails{id}', [AdminAssignmentController::class, 'view'])->name('admin.viewtaskdetails');
+
 Route::get('/member-activity', [GraphController::class, 'memberActivity'])->name('member_activity');
+
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail','MailController@html_email');
+Route::get('sendattachmentemail','MailController@attachment_email');

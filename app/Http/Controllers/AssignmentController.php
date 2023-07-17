@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Assignment;
 use App\Models\User;
+use App\Notifications\Assignment_Assigned;
+use Illuminate\Support\Facades\Notification;
 
 class AssignmentController extends Controller
 {
@@ -41,7 +43,20 @@ class AssignmentController extends Controller
       return redirect()->back()->with('success', 'Status updated successfully.');
     }
 
-    
+    public function assign(Request $request)
+{
+    $assignment = Assignment::findOrFail($request->input('assignment_id'));
+    $userIds = $request->input('users');
+    $users = User::whereIn('id', $userIds)->get();
+
+    $assignment->users()->attach($users);
+
+    // Send the notification to the assigned members
+    Notification::send($users, new Assignment_Assigned($assignment));
+
+    return redirect()->back()->with('status', 'Assignment assigned successfully.');
+}
+
 
     /**
      * Remove the specified resource from storage.
