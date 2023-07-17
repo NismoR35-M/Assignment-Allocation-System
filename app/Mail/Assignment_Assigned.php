@@ -24,11 +24,11 @@ class Assignment_Assigned extends Mailable
     public function __build()
     {
         return $this
-        ->from('noreply@example.<EMAIL>', '<NAME> <<EMAIL>>')
-        ->to('<EMAIL>')
+        ->from('mwaniki@laravel.com')
+        ->to('mwanikitiffany@gmail.com')
         ->subject('You have been assigned an assignment')
         // ->attachFromStorage('request')
-        ->view('emails/assignment_assigned')
+        ->view('emails.assignment_assigned')
         ;
     }
 

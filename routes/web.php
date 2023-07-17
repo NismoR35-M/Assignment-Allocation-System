@@ -21,11 +21,8 @@ use App\Http\Controllers\MailController;
 |
 */
 
-Route::get('/', function () {
-   
-
+Route::get('/', function ( ) {
 	\Illuminate\Support\Facades\Mail::send(new \App\Mail\Assignment_Assigned());
-
 	return view('welcome');
 });
 
