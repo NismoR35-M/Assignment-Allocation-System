@@ -83,6 +83,25 @@ Route::middleware(['web', 'admin'])->group(function () {
     Route::post('/admin/store', [AdminController::class, 'store'])->name('admin.login.store');
 	Route::get('/admin/profile', [AdminController::class, 'create'])->name('admin.profile');
 	Route::post('/admin/profile', [AdminController::class, 'update'])->name('admin.postProfile');
+	//message view
+	Route::get('/admin/message/{assignmentId}', [AssignmentController::class, 'createMessage'])->name('admin.createMessage');
+
+	// Store user message
+	Route::post('/assignments/{assignmentId}/store-message', [AssignmentController::class, 'storeMessage'])
+	->name('assignments.storeMessage');
+
+	// Reply from admin
+	Route::post('/assignments/{assignmentId}/reply-message', [AssignmentController::class, 'replyMessage'])
+	->name('assignments.replyMessage');
+
+	// Fetch user messages for admin
+	Route::get('/assignments/{assignmentId}/user-messages', [AssignmentController::class, 'getUserMessages'])
+	->name('assignments.getUserMessages');
+
+	// Fetch admin messages for user
+	Route::get('/assignments/{assignmentId}/admin-messages', [AssignmentController::class, 'getAdminMessages'])
+	->name('assignments.getAdminMessages');
+
 
     // Route::post('/admin/logout', [AdminController::class, 'logout'])->name('admin.logout');
     // Route::put('/admin/update/{id}', [AdminController::class, 'adminUpdate'])->name('admin.profile.update');
