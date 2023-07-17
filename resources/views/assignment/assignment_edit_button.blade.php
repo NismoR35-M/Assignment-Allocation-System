@@ -80,8 +80,8 @@
                                
                                 
                                 <div class="mb-3 ">
-                                    <label for="org_name" class="form-label">Organization Name</label>
-                                    <input type="text" class="form-control" id="org_name" name="org_name" value="{{ $assignment->org_name }}">
+                                    <label for="company_name" class="form-label">Organization Name</label>
+                                    <input type="text" class="form-control" id="org_name" name="org_name" value="{{ $assignment->company_name }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="request_type" class="form-label">Request Type</label>
@@ -92,9 +92,9 @@
                                     <textarea class="form-control smaller-textarea" id="description" name="description" rows="3">{{ old('description', $assignment->description) }}</textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="attachment" class="form-label">Attachment</label>
+                                    <label for="request" class="form-label">Attachment</label>
                                     @if ($assignment->attachment)
-                                        <p>Current Attachment: <a href="{{ asset('storage/' . $assignment->attachment) }}" class="btn btn-primary" target="_blank">{{ $assignment->attachment }}</a></p>
+                                        <p>Current Attachment: <a href="{{ asset('storage/' . $assignment->attachment) }}" class="btn btn-primary" target="_blank">{{ $assignment->request }}</a></p>
                                         <label for="remove_attachment">
                                             <input type="checkbox" id="remove_attachment" name="remove_attachment" value="1"> Remove Attachment
                                             

@@ -53,8 +53,8 @@
                         
                                 
                                 <div class="mb-3 ">
-                                    <label for="org_name" class="form-label">Organization Name</label>
-                                    <input type="text" class="form-control" id="org_name" data-readonly readonly value="{{ $assignment->org_name }}">
+                                    <label for="company_name" class="form-label">Organization Name</label>
+                                    <input type="text" class="form-control" id="org_name" data-readonly readonly value="{{ $assignment->company_name }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="request_type" class="form-label">Request Type</label>
@@ -66,10 +66,10 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="attachment" class="form-label">Attachment</label>
+                                    <label for="request" class="form-label">Attachment</label>
                                     <div>
-                                        @if($assignment->attachment)
-                                            <a href="{{ asset('storage/' . $assignment->attachment) }}" class="btn btn-primary" target="_blank">View Attachment</a>
+                                        @if($assignment->request)
+                                            <a href="{{ asset('storage/' . $assignment->request) }}" class="btn btn-primary" target="_blank">View Attachment</a>
                                         @else
                                             <p>No attachment</p>
                                         @endif
@@ -78,7 +78,7 @@
                                 
                                 <div class="mb-3">
                                     <label for="date_request_received" class="form-label">Date Request Received</label>
-                                    <input type="text" class="form-control" id="date_request_received" data-readonly readonly value="{{ $assignment->date_request_received }}">
+                                    <input type="text" class="form-control" id="date_request_received" data-readonly readonly value="{{ $assignment->start_date }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="status" class="form-label">Status</label>
@@ -89,7 +89,7 @@
                                     @if ($assignment->users->count() > 0)
                                         <ul>
                                             @foreach($assignment->users as $user)
-                                                <li>{{ $user->firstname }}  {{ $user->lastname }} {{ $user->staffnumber }}</li>
+                                                <li>{{ $user->first_name }}  {{ $user->last_name }} {{ $user->staff_number }}</li>
                                             @endforeach
                                         </ul>
                                     @else
@@ -99,7 +99,7 @@
                                 
                                 
                                 <div class="flex">
-                                <a href="{{ route('admin_assignments') }}">
+                                <a href="{{ route('show_assignments') }}">
                                     <button type="button" class="btn bg-gradient-dark">Back</button>
                                  </a>
 

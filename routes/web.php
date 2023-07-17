@@ -126,3 +126,7 @@ Route::get('/member-activity', [GraphController::class, 'memberActivity'])->name
 Route::get('sendbasicemail','MailController@basic_email');
 Route::get('sendhtmlemail','MailController@html_email');
 Route::get('sendattachmentemail','MailController@attachment_email');
+
+//Route::get('editdetails{id}', [AssignmentController::class, 'edit'])->name('assignEdit);
+//Route::get('updatedetails{id}', [AssignmentController::class, 'assignUpdate'])->name('assignUpdate);
+//Route::get('chat', [AssignmentController::class, 'viewchat'])->name('chat');
