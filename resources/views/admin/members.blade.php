@@ -25,9 +25,7 @@
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 ID</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                               First Name</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                               Last Name</th>
+                                               User Name</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                Staff Number</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
@@ -41,8 +39,7 @@
                                      @foreach ($users as $user)
                                       <tr>
                                          <td>{{$user->id}}</td>
-                                         <td>{{$user->first_name }}</td>
-                                         <td>{{$user->last_name }}</td>
+                                         <td>{{$user->first_name }} {{$user->last_name }}</td>
                                          <td>{{$user->staff_number }}</td>
                                          <td>{{$user->email }}</td>
                                          <td>

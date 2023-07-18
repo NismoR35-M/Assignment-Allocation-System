@@ -154,13 +154,20 @@ class AdminAssignmentController extends Controller
         return view('admin.members', compact('users'));
     }
 
-    public function viewAssignments(string $id)
+    public function viewAssignment(string $id)
     {
         $assignment = Assignment::findOrFail($id);
-        return view("assignment_view", compact(['assignment']));
+        return view("assignment.assignment_view", compact(['assignment']));
     }
 
-    public function viewMemberAssignment(string $id)
+        public function view2()
+    {
+        $id = 1; // Replace with the actual assignment ID
+        return $this->viewMemberAssignments($id);
+    }
+
+
+    public function viewMemberAssignments($id)
     {
         $assignment = Assignment::findOrFail($id);
         return view("user_assignments", compact(['assignment']));

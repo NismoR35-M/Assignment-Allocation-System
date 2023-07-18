@@ -120,7 +120,9 @@ Route::post('users/create', [AdminAssignmentController::class, 'createUser'])->n
 Route::delete('users/{id}', [AdminAssignmentController::class, 'deleteUser'])->name('admin.users.delete');
 
 Route::get('viewtaskdetails{id}', [AdminAssignmentController::class, 'viewAssignment'])->name('view_assignment');
-Route::get('member/assignments{id}', [AdminAssignmentController::class, 'viewMemberAssignments'])->name('view_member_assignment');
+Route::get('memberAssignments', [AdminAssignmentController::class, 'viewMemberAssignments'])->name('view_member_assignment');
+Route::get('/some-route', [AdminAssignmentController::class, 'view2'])->name('view2')->middleware('auth');
+
 
 Route::get('/member-activity', [GraphController::class, 'memberActivity'])->name('member_activity');
 

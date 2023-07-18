@@ -64,8 +64,7 @@
                                             </td>
                                             
                                            <td>
-                                            {{-- CHAT ROUTE  --}}
-                                             {{-- <a href="{{ route('chat', $assignment->id) }}"> --}}
+                                             <a href="{{ route('admin.createMessage', $assignment->id) }}"> 
                                                  <button type="button" class="btn btn-primary">Add Chat</button>
                                                </a>
                                         </td> 
