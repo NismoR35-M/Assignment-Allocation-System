@@ -23,8 +23,6 @@
                                     <thead>
                                         <tr>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                ID</th>
-                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                User Name</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                Staff Number</th>
@@ -38,7 +36,6 @@
                                     <tbody>
                                      @foreach ($users as $user)
                                       <tr>
-                                         <td>{{$user->id}}</td>
                                          <td>{{$user->first_name }} {{$user->last_name }}</td>
                                          <td>{{$user->staff_number }}</td>
                                          <td>{{$user->email }}</td>

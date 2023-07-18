@@ -227,8 +227,9 @@ class AdminAssignmentController extends Controller
         $assignment->users()->sync($membersAssigned);
 
         if (count($membersAssigned) > 0) {
-           $assignment->status = 'Assigned';
-       } else {
+           $assignment->status = 'Assigned';}
+            
+        else {
            $assignment->status = 'Unassigned';
        }
     
