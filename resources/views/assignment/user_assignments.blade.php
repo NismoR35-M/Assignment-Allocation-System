@@ -1,5 +1,5 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
-    <x-navbars.adminsidebar activePage="tables"></x-navbars.adminsidebar>
+    <x-navbars.admin_side_bar activePage="tables"></x-navbars.admin_side_bar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Tables"></x-navbars.navs.auth>
@@ -64,11 +64,11 @@
                                             </td>
                                             
                                            <td>
-                                             <a href="{{ route('chat', $assignment->id) }}"> 
+                                            {{-- CHAT ROUTE  --}}
+                                             {{-- <a href="{{ route('chat', $assignment->id) }}"> --}}
                                                  <button type="button" class="btn btn-primary">Add Chat</button>
                                                </a>
-                                           </td> 
-                                           
+                                        </td> 
                                             
 
                                            

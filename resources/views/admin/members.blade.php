@@ -33,7 +33,7 @@
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                                Email</th>
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                               Response</th>
+                                               View details</th>
 
                                         </tr>
                                     </thead>
@@ -45,7 +45,11 @@
                                          <td>{{$user->last_name }}</td>
                                          <td>{{$user->staff_number }}</td>
                                          <td>{{$user->email }}</td>
-                                         <td>{{$user->response }}</td>
+                                         <td>
+                                            <div class="card-footer">
+                                                <a href="{{ route('view_member_assignment') }}" class="btn btn-primary"> Assignments </a>
+                                            </div>
+                                         </td>
                                          <td> 
                                             <form action="{{ route('admin.users.delete', $user->id) }}" method="POST" style="display:inline">
                                                 @csrf

@@ -18,6 +18,8 @@ class Assignment extends Model
         'status',
         'response',
         'is_active',
+        'members_assigned',
+        'new_attachment',
         'latest_message_id',
         'is_read',
         'is_admin_reply',

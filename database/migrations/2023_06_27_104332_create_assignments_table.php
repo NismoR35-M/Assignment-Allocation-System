@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('response');
             $table->enum('status', ['Assigned', 'Unassigned', 'In Progress', 'Completed']);
             $table->boolean('is_active')->default('1');
+            $table->json('members_assigned')->nullable();
+            $table->string('new_attachment')->nullable();
+
             $table->timestamps();
         });
     }

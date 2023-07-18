@@ -1,5 +1,11 @@
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
     <x-navbars.admin_side_bar activePage="tables"></x-navbars.admin_side_bar>
+        <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Assignments"></x-navbars.navs.auth>
@@ -33,7 +39,7 @@
                                             <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
                                                 Members Assigned</th>
                                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">
-                                                Response</th>
+                                                View Details</th>
                                             
                                                 
                                             <th></th>
@@ -47,19 +53,42 @@
                                          <td>{{ $assignment->company_name }}</td>
                                          <td>{{ $assignment->status }}</td>
                                          <td>
-                                            @if($assignment->status === 'assigned')
-                                             <select>
-                                                 @foreach($assignment->users as $user)
-                                                     <option>{{ $user->first_name }} {{ $user->last_name }}</option>
-                                                 @endforeach
-                                             </select>
+                                            @if($assignment->status === 'Assigned')
+                                                <div class="dropdown">
+                                                    <button class="btn btn-primary dropdown-toggle" type="button" id="assignmentUsersDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        Select User
+                                                    </button>
+                                                    <div class="dropdown-menu" aria-labelledby="assignmentUsersDropdown">
+                                                        @foreach($assignment->users as $user)
+                                                            <button class="dropdown-item" type="button">{{ $user->first_name }} {{ $user->last_name }}</button>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
                                             @endif
-                                         </td>
+                                        </td>
+                                        {{-- <td><a href="{{ route('view_assignment')
+                                        }}" class="btn btn-primary"> Details</button></td>
+                                     </tr> --}}
+                                         <td><a href="{{ route('view_assignment', ['id' => 1])
+                                         }}" class="btn btn-primary">View Details</button></td>
                                       </tr>
                                      @endforeach
                                     </tbody>
                             </table>
-
+                               <div class="card-footer">
+                                    <a href="{{ route('assigned_assignments') }}" class="btn btn-primary">Assigned</a>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ route('unassigned_assignments') }}" class="btn btn-primary">Un Assigned</a>
+                                </div>
+                            <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
+                                    var dropdownList = dropdownElementList.map(function (dropdownToggleEl) {
+                                        return new bootstrap.Dropdown(dropdownToggleEl);
+                                    });
+                                });
+                            </script>                            
                        </div>
                     </div>
                 </div>

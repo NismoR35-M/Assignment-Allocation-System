@@ -1,5 +1,5 @@
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
-    <x-navbars.adminsidebar activePage="tables"></x-navbars.adminsidebar>
+    <x-navbars.admin_side_bar activePage="tables"></x-navbars.admin_side_bar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Tables"></x-navbars.navs.auth>

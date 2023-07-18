@@ -1,5 +1,5 @@
 <x-layout bodyClass="g-sidenav-show bg-gray-200">
-    <x-navbars.adminsidebar activePage="tables"></x-navbars.adminsidebar>
+    <x-navbars.admin_side_bar activePage="tables"></x-navbars.admin_side_bar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Tables"></x-navbars.navs.auth>
@@ -92,9 +92,9 @@
                                     <textarea class="form-control smaller-textarea" id="description" name="description" rows="3">{{ old('description', $assignment->description) }}</textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="request" class="form-label">Attachment</label>
-                                    @if ($assignment->attachment)
-                                        <p>Current Attachment: <a href="{{ asset('storage/' . $assignment->attachment) }}" class="btn btn-primary" target="_blank">{{ $assignment->request }}</a></p>
+                                    <label for="request" class="form-label">Request</label>
+                                    @if ($assignment->request)
+                                        <p>Current Attachment: <a href="{{ asset('storage/' . $assignment->arequest) }}" class="btn btn-primary" target="_blank">{{ $assignment->request }}</a></p>
                                         <label for="remove_attachment">
                                             <input type="checkbox" id="remove_attachment" name="remove_attachment" value="1"> Remove Attachment
                                             
@@ -112,16 +112,16 @@
                             
                                 
                                 <div class="mb-3">
-                                    <label for="date_request_received" class="form-label">Date Request Received</label>
-                                    <input type="date" class="form-control smaller-input" id="date_request_received" name="date_request_received" value="{{ old('date_request_received', $assignment->date_request_received) }}">
+                                    <label for="start_date" class="form-label">Date Request Received</label>
+                                    <input type="date" class="form-control smaller-input" id="date_request_received" name="start_date" value="{{ old('start_date', $assignment->start_date) }}">
                                 </div>
                                 
        
                                 <div class="mb-3">
                                     <label for="status" class="form-label">Status</label>
                                     <select class="form-control smaller-textarea" id="status" name="status">
-                                        <option value="assigned" @if ($assignment->status === 'assigned') selected @endif>Assigned</option>
-                                        <option value="unassigned" @if ($assignment->status === 'unassigned') selected @endif>Unassigned</option>
+                                        <option value="assigned" @if ($assignment->status === 'Assigned') selected @endif>Assigned</option>
+                                        <option value="unassigned" @if ($assignment->status === 'Unassigned') selected @endif>Unassigned</option>
                                     </select>
                                 </div>
                                 
@@ -131,7 +131,7 @@
                                         <!-- Render the list of users as options -->
                                         @foreach ($users as $user)
                                         <option value="{{ $user->id }}" @if (in_array($user->id, $assignment->users->pluck('id')->toArray())) selected @endif>
-                                            {{ $user->firstname }} {{ $user->lastname }} {{ $user->staffnumber }}
+                                            {{ $user->first_name }} {{ $user->last_name }} {{ $user->staff_number }}
                                         </option>
                                         @endforeach
                                     </select>
