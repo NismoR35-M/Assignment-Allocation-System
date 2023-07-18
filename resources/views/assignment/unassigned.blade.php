@@ -51,7 +51,7 @@
                                 {{--Assignment table  --}}
                                 <div class="center">
                                     <!-- Your custom content for assigned assignments -->
-                                    @if ($assignedAssignments->count() > 0)
+                                    @if ($unassignedAssignments->count() > 0)
                                     <div class="table-responsive">
                                         <table class="table table-bordered">
                                             <thead>
