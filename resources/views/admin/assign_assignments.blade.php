@@ -50,7 +50,7 @@
                                         <tr>
                                         <td>
                                         <label for="start_date">Date Received:</label>
-                                        <input type="date" id="datereceived" name="datereceived" required>
+                                        <input type="date" id="start_date" name="start_date" required>
                                         </td>
                                         </tr>
                                         

@@ -7,16 +7,139 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
+
 
 class AdminAssignmentController extends Controller
 {
+    
+    public function index()
+    {
+
+        // Retrieve the authenticated user
+        $user = Auth::user();
+
+    // Get the assignments assigned to the user
+       $assignments = $user->assignments;
+       $assignments = Assignment::orderBy('created_at', 'desc')->get();
+
+        return view('pages.tables', compact('assignments'));
+    }   
+    public function adminIndex()
+    {
+        $assignments = Assignment::orderBy('created_at', 'desc')->get();
+        $assignment_Count = Assignment::count();
+
+        return view('pages.admin_assignments', compact('assignments', 'assignment_Count'));
+    }
+
+    /////////////////////////////////////////ASSIGN ASSIGNMENT ///////////////////////////////////////////
     public function create()
     {
         $users = User::all();
         return view('admin.assign_assignments', compact('users'));
     }
 
-    public function shows()
+
+    public function assign(Request $request)
+    {
+        $assignment = Assignment::findOrFail($request->input('assignment_id'));
+        $userIds = $request->input('users');
+        $users = User::whereIn('id', $userIds)->get();
+
+        $assignment->users()->attach($users);
+
+        return redirect()->back()->with('status', 'Assignment assigned successfully.');
+    }
+
+
+    public function assignAssignment(Request $request)
+    {
+        //dd($request->all());
+        //Validate the form data
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'company_name' => 'required',
+            'request_type' => 'required',
+            'description' => 'required',
+            'start_date' => 'required',
+            'status' => 'required',
+            'response' => 'nullable',
+            'response_file' => 'nullable|file',
+            'users' => 'required|array', // Assuming the input name for users is 'users'
+        ]);
+       
+       
+        $path = null;
+        // // Upload and store the response file, if provided
+        if ($request->hasFile('response_file')) {
+            $file = $request->file('response_file');
+            $path = $request->store('response_files', 'public');
+        
+        }
+
+        // Save the assignment in the database
+        $assignment = new Assignment();
+
+        $assignment->company_name = $request->company_name;
+        $assignment->request_type = $request->request_type;
+        $assignment->description = $request->description;
+        $assignment->start_date = $request->start_date;
+        $assignment->status = $request->status;
+        $assignment->file_type = $request->getClientOriginalExtension();
+        $assignment->response = $path;
+        $assignment->save();
+
+            ////////// INITIAL CODE //////
+    //      $assignment->users()->sync($validatedData['user']);
+    //     // Assign users to the assignment
+    //     $userIds = $validatedData['users'];
+    //     $assignment->users()->attach($userIds);
+
+    // Attach members if the status is "Assigned"
+    if ($request->status === 'Assigned' && $request->has('members_assigned')) {
+        $membersAssigned = $request->members_assigned;
+        $assignment->users()->attach($membersAssigned);
+    }
+
+    // Check if the authenticated user is using the 'admin' guard
+    if (auth()->guard('admin')->check()) {
+        // If the user is an admin, redirect to the admin assignment view
+        return redirect()->route('admin_assignments')->with('status', 'Assignment added successfully.');
+    } else {
+        // If the user is not an admin, redirect to the tables view
+        return redirect()->route('show_assignments')->with('status', 'Assignment added successfully.');
+    }
+    }
+
+/////////////////////////// ACTIONS ///////////////////////////////////////////////////////
+    
+    public function userAssignments(string $id)
+    {
+        $assignment = Assignment::findOrFail($id);
+    
+        return view('assignment.user_assignments', compact('assignment'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit($id)
+    {
+        $assignment = Assignment::findOrFail($id);
+        $users = User::all();
+        return view('assignment.assignment_edit_button', compact('assignment','users'));
+    }
+
+    public function showAssign(string $id)
+    {
+        $assignment = Assignment::findOrFail($id);
+    
+        return view('assignment.assignment_view', compact('assignment'));
+    }
+
+
+    public function showAssignments()
     {
         $assignments = Assignment::all(); // Replace `Assignment` with your actual model name
 
@@ -31,64 +154,114 @@ class AdminAssignmentController extends Controller
         return view('admin.members', compact('users'));
     }
 
-    public function assign(Request $request)
+    public function viewAssignments(string $id)
     {
-        $assignment = Assignment::findOrFail($request->input('assignment_id'));
-        $userIds = $request->input('users');
-        $users = User::whereIn('id', $userIds)->get();
-
-        $assignment->users()->attach($users);
-
-        return redirect()->back()->with('status', 'Assignment assigned successfully.');
+        $assignment = Assignment::findOrFail($id);
+        return view("assignment_view", compact(['assignment']));
     }
 
-        public function assignAssignment(Request $request)
+    public function viewMemberAssignment(string $id)
     {
-        //dd($request->all());
-        // Validate the form data
-        $validatedData = $request->validate([
-            'name' => 'required',
+        $assignment = Assignment::findOrFail($id);
+        return view("user_assignments", compact(['assignment']));
+    }
+
+    public function assignUpdate(Request $request, $id)
+    {
+        $request->validate([
             'company_name' => 'required',
             'request_type' => 'required',
             'description' => 'required',
             'start_date' => 'required',
             'status' => 'required',
-            'response' => 'nullable',
-            'response_file' => 'nullable|file',
-            'users' => 'required|array', // Assuming the input name for users is 'users'
+            'members_assigned' => 'required|array',
+            'new_attachment' => 'nullable|file'
         ]);
-       
-        //dd($validatedData);
-
-    // Create a new Assignment instance
-    $assignment = new Assignment();
-
-        // Assign form data to the Assignment instance
-        $assignment->name = $request->input('name');
+    
+        $assignment = Assignment::findOrFail($id);
         $assignment->company_name = $request->input('company_name');
         $assignment->request_type = $request->input('request_type');
         $assignment->description = $request->input('description');
-        $assignment->start_date = $request->input('start_date');
+        $assignment->start_date_request_received = $request->input('start_date');
         $assignment->status = $request->input('status');
-        $assignment->response = $request->input('response');
+    
+        // Check if the remove attachment option is selected
+        if ($request->has('remove_attachment')) {
+            // Remove the current attachment
+            if ($assignment->request) {
+                Storage::disk('public')->delete($assignment->request);
+                $assignment->request = null;
+            }
+        }
+    
+        // Handle attachment update
+        if ($request->hasFile('new_attachment')) {
+            // Remove the current attachment (optional)
+            if ($assignment->request) {
+                Storage::disk('public')->delete($assignment->request);
+            }
+    
+            // Upload and store the new attachment
+            $newAttachment = $request->file('new_attachment');
+            $newAttachmentPath = $newAttachment->store('requests', 'public');
+            $assignment->request = $newAttachmentPath;
+        }
+    
+        // Update members assigned
+        $membersAssigned = $request->input('members_assigned');
+        $assignment->users()->sync($membersAssigned);
 
-    // Upload and store the response file, if provided
-    if ($request->hasFile('response_file')) {
-        $file = $request->file('response_file');
-        $path = $file->store('response_files', 'public');
-        $assignment->response_file = $path;
-    }
-
-        // Save the Assignment instance to the database
+        if (count($membersAssigned) > 0) {
+           $assignment->status = 'Assigned';
+       } else {
+           $assignment->status = 'Unassigned';
+       }
+    
         $assignment->save();
-
-        // Assign users to the assignment
-        $userIds = $validatedData['users'];
-        $assignment->users()->attach($userIds);
-
-        // Redirect or perform any other actions after saving the assignment
-        return redirect()->route('show_assignments')->with('success', 'Assignment saved successfully!');
+    
+        return redirect()->route('view_assignment', $assignment->id)->with('status', 'Assignment updated successfully.');
     }
+
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:In Progress,Completed'
+        ]);
+    
+        $assignment = Assignment::findOrFail($id);
+    
+       //  // Check if the assignment is in the correct status flow
+       //  if ($assignment->status === 'Assigned' && ($request->input('status') === 'In Progress' || $request->input('status') === 'Completed')) {
+            $assignment->status = $request->input('status');
+            $assignment->save();
+    
+            return redirect()->back()->with('status', 'Status updated successfully.');
+       //  }
+    
+        // Invalid status update attempted
+        //return redirect()->back()->withErrors(['status' => 'Invalid status update attempted.']);
+    }
+    
+
+
+        public function deleteAttachment(Request $request, $id)
+    {
+          $assignment = Assignment::findOrFail($id);
+
+      if ($assignment->request) {
+       // Delete the attachment file
+       Storage::disk('public')->delete($assignment->request);
+
+       // Remove the attachment reference from the assignment
+       $assignment->request = null;
+       $assignment->save();
+
+       return redirect()->route('assignment_edit', $assignment->id)->with('status', 'Attachment deleted successfully.');
+      }
+
+   return redirect()->route('assignEdit', $assignment->id)->with('status', 'No attachment found.');
+}
 
 
 public function createForm()
@@ -129,5 +302,18 @@ public function createForm()
             return redirect()->back()->with('error', 'Failed to delete Student record!!!');
         }
     }
+
+       public function assigned(){
+
+       $assignedAssignments = Assignment::where('status', 'Assigned')->get();
+
+       return view('assignment.assigned', compact('assignedAssignments'));
+       }
+
+       public function unassigned(){
+
+        $unassignedAssignments = Assignment::where('status','Unassigned')->get();
+        return view('assignment.unassigned',compact('unassignedAssignments'));
+       }
 
 }

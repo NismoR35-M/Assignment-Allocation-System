@@ -207,7 +207,7 @@ class AssignmentController extends Controller
         //  }
      
          // Invalid status update attempted
-         return redirect()->back()->withErrors(['status' => 'Invalid status update attempted.']);
+         //return redirect()->back()->withErrors(['status' => 'Invalid status update attempted.']);
      }
      
 

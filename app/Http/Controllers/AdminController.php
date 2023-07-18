@@ -49,9 +49,9 @@ class AdminController extends AdminBaseController {
 
     public function dashboard(){
 
-        $assignedCount = Assignment::where('status', 'assigned')->count();
-        $notAssignedCount = Assignment::where('status', 'unassigned')->count();
-        $inProgressCount = Assignment::where('status', 'InProgress')->count();
+        $assignedCount = Assignment::where('status', 'Assigned')->count();
+        $notAssignedCount = Assignment::where('status', 'Unassigned')->count();
+        $inProgressCount = Assignment::where('status', 'In Progress')->count();
         $completedCount = Assignment::where('status', 'Completed')->count();
 
         return view('admin.adminDashboard', compact('assignedCount', 'notAssignedCount', 'inProgressCount', 'completedCount'));

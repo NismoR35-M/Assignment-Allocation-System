@@ -18,6 +18,8 @@ class Assignment extends Model
         'status',
         'response',
         'is_active',
+        'members_assigned',
+        'new_attachment',
         'latest_message_id',
         'is_read',
         'is_admin_reply',
@@ -28,8 +30,8 @@ class Assignment extends Model
         return $this->belongsToMany(User::class, 'junctions', 'assignments_id', 'users_id');
     }
     
-    public function assignmentuser()
-    {
-        return $this->hasMany(Junction::class, 'assignments_id');
-    }
+    // public function assignmentuser()
+    // {
+    //     return $this->hasMany(Junction::class, 'assignments_id');
+    // }
 }

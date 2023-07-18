@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -9,6 +8,7 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminAssignmentController;
 use App\Http\Controllers\GraphController;
+use App\Http\Controllers\MailController;
    
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +21,9 @@ use App\Http\Controllers\GraphController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function ( ) {
+	\Illuminate\Support\Facades\Mail::send(new \App\Mail\Assignment_Assigned());
+	return view('welcome');
 });
 
          
@@ -109,13 +110,32 @@ Route::middleware(['web', 'admin'])->group(function () {
 // ADMIN
 // Route to view the details of an assignment
 Route::get('/admin/viewAssignments', [AdminAssignmentController::class, 'create'])->name('create_assignment');
-Route::post('/assignments/assign', [AdminAssignmentController::class, 'assign'])->name('assign_assignments');
+//Route::post('/assignments/assign', [AdminAssignmentController::class, 'assign'])->name('assign_assignments');
 Route::post('/save-assignment', [AdminAssignmentController::class, 'assignAssignment'])->name('assign_assignment');
-Route::get('/admin/assignments', [AdminAssignmentController::class, 'shows'])->name('show_assignments');
+Route::get('/admin/assignments', [AdminAssignmentController::class, 'showAssignments'])->name('show_assignments');
 Route::get('/admin/view/members', [AdminAssignmentController::class, 'show_users'])->name('show_users');
 
 Route::get('users/create', [AdminAssignmentController::class, 'createForm'])->name('admin.addUser');
 Route::post('users/create', [AdminAssignmentController::class, 'createUser'])->name('admin.users.save');
 Route::delete('users/{id}', [AdminAssignmentController::class, 'deleteUser'])->name('admin.users.delete');
 
+Route::get('viewtaskdetails{id}', [AdminAssignmentController::class, 'viewAssignment'])->name('view_assignment');
+Route::get('member/assignments{id}', [AdminAssignmentController::class, 'viewMemberAssignments'])->name('view_member_assignment');
+
 Route::get('/member-activity', [GraphController::class, 'memberActivity'])->name('member_activity');
+
+Route::get('sendbasicemail','MailController@basic_email');
+Route::get('sendhtmlemail','MailController@html_email');
+Route::get('sendattachmentemail','MailController@attachment_email');
+
+
+Route::get('showAssignment', [AdminAssignmentController::class, 'showAssign'])->name('');
+Route::get('userAssignments', [AdminAssignmentController::class, 'userAssignments'])->name('userAssignments');
+Route::get('editdetails{id}', [AdminAssignmentController::class, 'edit'])->name('assignEdit');
+Route::get('updatedetails{id}', [AdminAssignmentController::class, 'assignUpdate'])->name('assignUpdate');
+
+//Route::get('chat', [AssignmentController::class, 'viewchat'])->name('chat');
+
+Route::get('/assigned-assignments', [AdminAssignmentController::class, 'assigned'])->name('assigned_assignments');
+Route::get('/unassigned-assignments', [AdminAssignmentController::class, 'unassigned'])->name('unassigned_assignments');
+

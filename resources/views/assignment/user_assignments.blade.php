@@ -1,5 +1,5 @@
 <x-layout bodyClass="g-sidenav-show  bg-gray-200">
-    <x-navbars.adminsidebar activePage="tables"></x-navbars.adminsidebar>
+    <x-navbars.admin_side_bar activePage="tables"></x-navbars.admin_side_bar>
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Tables"></x-navbars.navs.auth>
@@ -13,8 +13,8 @@
                     <div class="card my-4">
                         <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg pt-4 pb-3">
-                                <h4 class="text-white text-capitalize ps-3">{{ $user->firstname }} {{ $user->lastname }}</h4>
-                                <h5 class="text-white text-capitalize ps-3">Staff Number: {{ $user->staffnumber }}</h5>
+                                <h4 class="text-white text-capitalize ps-3">{{ $user->first_name }} {{ $user->last_name }}</h4>
+                                <h5 class="text-white text-capitalize ps-3">Staff Number: {{ $user->staff_number }}</h5>
                                 <h6 class="text-white text-capitalize ps-3">Email: {{ $user->email }}</h6>
                                 
 
@@ -38,13 +38,14 @@
                                          @else
                                           @foreach($user->assignments as $assignment)
                                            <tr>
-                                             <td>{{ $assignment->org_name }}</td>
+                                             <td>{{ $assignment->_name }}</td>
                                              <td>
                                                 @if ($assignment->users->count() > 1)
-                                                    <select class="form-select">
+                                                    <select class="form-select"> 
+                                                        {{-- ask Fai --}}
                                                         @foreach ($assignment->users as $member)
                                                             @if ($member->id !== $user->id)
-                                                                <option value="{{ $member->id }}">{{ $member->firstname }} {{ $member->lastname }}</option>
+                                                                <option value="{{ $member->id }}">{{ $member->first_name }} {{ $member->last_name }}</option>
                                                             @endif
                                                         @endforeach
                                                     </select>
@@ -63,11 +64,11 @@
                                             </td>
                                             
                                            <td>
-                                             <a href="{{ route('admin.createMessage', $assignment->id) }}"> 
+                                            {{-- CHAT ROUTE  --}}
+                                             {{-- <a href="{{ route('chat', $assignment->id) }}"> --}}
                                                  <button type="button" class="btn btn-primary">Add Chat</button>
                                                </a>
-                                           </td> 
-                                           
+                                        </td> 
                                             
 
                                            
