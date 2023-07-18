@@ -76,8 +76,7 @@
                             <div class="center">
                             <form  method="POST" action="{{route('assignUpdate',['id' => $assignment->id]) }}" enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT')
-                               
+                                @method('PUT')                              
                                 
                                 <div class="mb-3 ">
                                     <label for="company_name" class="form-label">Organization Name</label>

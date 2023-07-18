@@ -120,7 +120,7 @@ Route::post('users/create', [AdminAssignmentController::class, 'createUser'])->n
 Route::delete('users/{id}', [AdminAssignmentController::class, 'deleteUser'])->name('admin.users.delete');
 
 Route::get('viewtaskdetails{id}', [AdminAssignmentController::class, 'viewAssignment'])->name('view_assignment');
-Route::get('memberAssignments', [AdminAssignmentController::class, 'viewMemberAssignments'])->name('view_member_assignment');
+Route::get('member/Assignments/{id}', [AdminAssignmentController::class, 'viewMemberAssignments'])->name('view_member_assignment');
 Route::get('/some-route', [AdminAssignmentController::class, 'view2'])->name('view2')->middleware('auth');
 
 
@@ -133,8 +133,8 @@ Route::get('sendattachmentemail','MailController@attachment_email');
 
 Route::get('showAssignment', [AdminAssignmentController::class, 'showAssign'])->name('');
 Route::get('userAssignments', [AdminAssignmentController::class, 'userAssignments'])->name('userAssignments');
-Route::get('editdetails{id}', [AdminAssignmentController::class, 'edit'])->name('assignEdit');
-Route::post('updatedetails', [AdminAssignmentController::class, 'assignUpdate'])->name('assignUpdate');
+Route::get('Assignments/{id}/Edit', [AdminAssignmentController::class, 'edit'])->name('assignEdit');
+Route::put('Assignments/{id}/update', [AdminAssignmentController::class, 'assignUpdate'])->name('assignUpdate');
 
 //Route::get('chat', [AssignmentController::class, 'viewchat'])->name('chat');
 

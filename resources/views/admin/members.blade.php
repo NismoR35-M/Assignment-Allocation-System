@@ -41,9 +41,10 @@
                                          <td>{{$user->email }}</td>
                                          <td>
                                             <div class="card-footer">
-                                                <a href="{{ route('view_member_assignment') }}" class="btn btn-primary"> Assignments </a>
+                                                <a href="{{ route('view_member_assignment', $user->id) }}" class="btn btn-primary">Assignments</a>
                                             </div>
-                                         </td>
+                                        </td>
+
                                          <td> 
                                             <form action="{{ route('admin.users.delete', $user->id) }}" method="POST" style="display:inline">
                                                 @csrf
