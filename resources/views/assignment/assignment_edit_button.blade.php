@@ -76,7 +76,7 @@
                             <div class="center">
                             <form  method="POST" action="{{route('assignUpdate',['id' => $assignment->id]) }}" enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT')
+                                @method('POST')
                                
                                 
                                 <div class="mb-3 ">

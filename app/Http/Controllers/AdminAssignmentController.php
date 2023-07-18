@@ -167,11 +167,19 @@ class AdminAssignmentController extends Controller
     }
 
 
+    // public function viewMemberAssignments($id)
+    // {
+    //     $assignment = Assignment::findOrFail($id);
+    //     return view("assignment.user_assignments", compact('assignment'));
+    // }
     public function viewMemberAssignments($id)
-    {
-        $assignment = Assignment::findOrFail($id);
-        return view("user_assignments", compact(['assignment']));
-    }
+{
+    $user = User::findOrFail($id);
+    return view("assignment.user_assignments", compact('user'));
+}
+
+
+
 
     public function assignUpdate(Request $request, $id)
     {
