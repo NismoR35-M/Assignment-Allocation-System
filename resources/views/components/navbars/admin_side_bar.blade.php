@@ -79,18 +79,6 @@
             
 
             <li class="nav-item">
-            <a class="nav-link text-white {{ $activePage == 'dashboard' ? ' active bg-gradient-primary' : '' }}" 
-            href="{{ route('admin.createMessage', ['assignmentId' => $assignment->id]) }}">
-                <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
-                    <i class="material-icons opacity-10">dashboard</i>
-                </div>
-                <span class="nav-link-text ms-1">Messaging</span>
-            </a>
-            </li>
-
-            
-
-            <li class="nav-item">
                 <a class="nav-link text-white " href="{{ route('static-sign-in') }}">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">login</i>

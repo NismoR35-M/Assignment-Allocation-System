@@ -14,6 +14,8 @@ class AssignmentFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = \App\Models\Assignment::class;
+
     public function definition(): array
     {
         return [
@@ -25,7 +27,7 @@ class AssignmentFactory extends Factory
             'company_name' => $this->faker->streetName,
             'request' => $this->faker->text,
             'response' => $this-> faker -> text,
-            'status' => $this->faker->randomElement(['Assigned', 'Unassigned', 'InProgress', 'Completed']),
+            'status' => $this->faker->randomElement(['Assigned', 'Unassigned', 'In Progress', 'Completed']),
             'is_active' => $this ->faker->boolean(80),
         ];
     }
