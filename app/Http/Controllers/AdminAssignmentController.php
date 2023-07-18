@@ -184,6 +184,7 @@ class AdminAssignmentController extends Controller
     public function assignUpdate(Request $request, $id)
     {
         $request->validate([
+            'name' => 'required',
             'company_name' => 'required',
             'request_type' => 'required',
             'description' => 'required',
