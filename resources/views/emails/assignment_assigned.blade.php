@@ -1,4 +1,4 @@
-{{-- @component('mail::message')
+@component('mail::message')
     # Assignment Assigned
 
     Hello {{ $user->name }},
@@ -15,7 +15,5 @@
 
     Regards,
     {{ config('app.name') }}
-@endcomponent --}}
-
-<h1>Hi, {{ $name }}</h1>
-l<p>Sending Mail from Laravel.</p>
+@endcomponent
+ 
