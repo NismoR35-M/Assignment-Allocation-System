@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
             'is_active' => 1,
         ]);
 
-        Admin::factory()->count(8)->create();
+        Admin::factory()->count(2)->create();
     }
 
 }

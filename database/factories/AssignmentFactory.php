@@ -1,6 +1,8 @@
 <?php
 
 namespace Database\Factories;
+use App\Models\User;
+use App\Models\Junction;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,19 +20,22 @@ class AssignmentFactory extends Factory
 
     public function definition(): array
     {
+        $userIds = User::pluck('id')->toArray();
+        $randomUserIds = $this->faker->randomElements($userIds, 5); 
         return [
-            'name' => $this->faker->name,
-            'request_type' => $this->faker->name,
-            'description' =>  $this->faker->name,
+            'name' => $this->faker->streetName,
+            'company_name' => $this->faker->company,
+            'request_type' => $this->faker->word,
+            'description' =>  $this->faker->sentence,
             'start_date' =>  $this->faker->dateTimeThisYear,
-            // 'end_date' =>  $this->faker->dateTimeThisYear,
-            'company_name' => $this->faker->streetName,
-            'request' => $this->faker->text,
-            'response' => $this-> faker -> text,
             'status' => $this->faker->randomElement(['Assigned', 'Unassigned', 'In Progress', 'Completed']),
+            'request_file' => null,
+            'file_type' => null,
+            'response' => null,
             'is_active' => $this ->faker->boolean(80),
-            'members_assigned' => [],
+            'members_assigned' => json_encode($randomUserIds),
             'new_attachment' => null,
         ];
     }
+
 }

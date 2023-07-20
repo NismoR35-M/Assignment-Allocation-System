@@ -61,7 +61,6 @@
                                                     <th>Description</th>
                                                     <th>Attachment</th>
                                                     <th>Date Request Received</th>
-                                                    <th>Status</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -77,8 +76,7 @@
                                                                 No attachment
                                                             @endif
                                                         </td>
-                                                        <td>{{ $assignment->start_date }}</td>
-                                                        <td>{{ $assignment->status }}</td>
+                                                        <td>{{ $assignment->start_date }}</td>                                                      
                                                     </tr>
                                                 @endforeach
                                             </tbody>

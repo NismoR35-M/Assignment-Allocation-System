@@ -1,7 +1,6 @@
 <?php
 
 namespace Database\Factories;
-use App\Models\Admin;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
 

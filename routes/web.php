@@ -111,7 +111,12 @@ Route::middleware(['web', 'admin'])->group(function () {
 // Route to view the details of an assignment
 Route::get('/admin/viewAssignments', [AdminAssignmentController::class, 'create'])->name('create_assignment');
 //Route::post('/assignments/assign', [AdminAssignmentController::class, 'assign'])->name('assign_assignments');
-Route::post('/save-assignment', [AdminAssignmentController::class, 'assignAssignment'])->name('assign_assignment');
+//Route::post('/save-assignment', [AdminAssignmentController::class, 'assignAssignment'])->name('assign_assignment');
+Route::post('/save-assignment', [AdminAssignmentController::class, 'assignAssignment'])
+    ->middleware('web')
+    ->name('assign_assignment');
+
+
 Route::get('/admin/assignments', [AdminAssignmentController::class, 'showAssignments'])->name('show_assignments');
 Route::get('/admin/view/members', [AdminAssignmentController::class, 'show_users'])->name('show_users');
 
@@ -131,7 +136,7 @@ Route::get('sendhtmlemail','MailController@html_email');
 Route::get('sendattachmentemail','MailController@attachment_email');
 
 
-Route::get('showAssignment', [AdminAssignmentController::class, 'showAssign'])->name('');
+Route::get('showAssignment', [AdminAssignmentController::class, 'showAssign'])->name('show_assignment');
 Route::get('userAssignments', [AdminAssignmentController::class, 'userAssignments'])->name('userAssignments');
 Route::get('Assignments/{id}/Edit', [AdminAssignmentController::class, 'edit'])->name('assignEdit');
 Route::put('Assignments/{id}/update', [AdminAssignmentController::class, 'assignUpdate'])->name('assignUpdate');

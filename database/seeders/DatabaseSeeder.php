@@ -16,8 +16,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+    // uncomment the assignment after seeding user
     
-        $this->call(AssignmentSeeder::class);
+        //$this->call(AssignmentSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(AdminSeeder::class);
     }

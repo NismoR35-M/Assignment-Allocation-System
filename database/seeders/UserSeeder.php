@@ -23,6 +23,6 @@ class UserSeeder extends Seeder
             'is_active' => 1,
         ]);
 
-        User::factory()->count(6)->create();
+        User::factory()->count(5)->create();
     }
 }

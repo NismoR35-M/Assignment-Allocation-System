@@ -55,7 +55,7 @@ class AdminAssignmentController extends Controller
 
     public function assignAssignment(Request $request)
     {
-        //dd($request->all());
+      
         //Validate the form data
         $validatedData = $request->validate([
             'name' => 'required',
@@ -64,9 +64,8 @@ class AdminAssignmentController extends Controller
             'description' => 'required',
             'start_date' => 'required',
             'status' => 'required',
-            'response' => 'nullable',
-            'response_file' => 'nullable|file',
-            'users' => 'required|array', // Assuming the input name for users is 'users'
+            'request_file' => 'nullable|file',
+            'members_assigned' => 'required|array', 
         ]);
        
        
@@ -80,14 +79,14 @@ class AdminAssignmentController extends Controller
 
         // Save the assignment in the database
         $assignment = new Assignment();
-
+        $assignment->name = $request->name;
         $assignment->company_name = $request->company_name;
         $assignment->request_type = $request->request_type;
         $assignment->description = $request->description;
         $assignment->start_date = $request->start_date;
         $assignment->status = $request->status;
-        $assignment->file_type = $request->getClientOriginalExtension();
-        $assignment->response = $path;
+        $assignment->file_type = $request->file('request_file')->getClientOriginalExtension();
+        // $assignment->response = $path;
         $assignment->save();
 
             ////////// INITIAL CODE //////
@@ -131,11 +130,11 @@ class AdminAssignmentController extends Controller
         return view('assignment.assignment_edit_button', compact('assignment','users'));
     }
 
-    public function showAssign(string $id)
+    public function showAssign($id)
     {
         $assignment = Assignment::findOrFail($id);
     
-        return view('assignment.assignment_view', compact('assignment'));
+        return view('admin.view_details', compact('assignment'));
     }
 
 

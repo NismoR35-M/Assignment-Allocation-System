@@ -9,6 +9,8 @@ class Assignment extends Model
 {
     use HasFactory;
 
+    protected $table = 'assignments';
+    protected $primaryKey = 'id';
     protected $fillable = [
         'name',
         'company_name',
@@ -16,14 +18,13 @@ class Assignment extends Model
         'description',
         'start_date',
         'status',
+        'request_file',
         'response',
         'is_active',
         'members_assigned',
         'new_attachment',
-        'latest_message_id',
-        'is_read',
-        'is_admin_reply',
     ];
+    
 
     public function users()
     {

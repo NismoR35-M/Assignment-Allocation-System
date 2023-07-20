@@ -72,11 +72,11 @@
                                                 <option value="unassigned">Unassigned</option>
                                             </select>         
                                         <div id="userDropdown" style="display: none;">
-                                            <label for="user">Assigned Users:</label>
+                                            <label for="members_assigned">Assigned Users:</label>
                                             <div id="userCheckboxes">
                                                 @foreach($users as $user)
                                                     <div>
-                                                        <input type="checkbox" id="user{{ $user->id }}" name="user[]" value="{{ $user->id }}">
+                                                        <input type="checkbox" id="user{{ $user->id }}" name="members_assigned[]" value="{{ $user->id }}">
                                                         <label for="user{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }} {{ $user->staff_number }}</label>
                                                     </div>
                                                 @endforeach
