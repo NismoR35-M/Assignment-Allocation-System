@@ -21,12 +21,13 @@ use App\Http\Controllers\MailController;
 |
 */
 
-Route::get('/', function ( ) {
+Route::get('/welcome', function ( ) {
 	\Illuminate\Support\Facades\Mail::send(new \App\Mail\Assignment_Assigned());
 	return view('welcome');
 });
 
-         
+Route::get('/send-assignment-notification', [MailController::class, 'sendAssignmentNotification'])->name('send_assignment_notification');
+
 
 Route::get('/', function () {return redirect('sign-in');})->middleware('guest');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
@@ -124,7 +125,7 @@ Route::get('users/create', [AdminAssignmentController::class, 'createForm'])->na
 Route::post('users/create', [AdminAssignmentController::class, 'createUser'])->name('admin.users.save');
 Route::delete('users/{id}', [AdminAssignmentController::class, 'deleteUser'])->name('admin.users.delete');
 
-Route::get('viewtaskdetails{id}', [AdminAssignmentController::class, 'viewAssignment'])->name('view_assignment');
+Route::get('viewtaskdetails{id}', [AdminAssignmentController::class, 'showAssign'])->name('view_assignment');
 Route::get('member/Assignments/{id}', [AdminAssignmentController::class, 'viewMemberAssignments'])->name('view_member_assignment');
 Route::get('/some-route', [AdminAssignmentController::class, 'view2'])->name('view2')->middleware('auth');
 
@@ -136,10 +137,10 @@ Route::get('sendhtmlemail','MailController@html_email');
 Route::get('sendattachmentemail','MailController@attachment_email');
 
 
-Route::get('showAssignment', [AdminAssignmentController::class, 'showAssign'])->name('show_assignment');
+// Route::get('showAssignment', [AdminAssignmentController::class, 'showAssign'])->name('show_assignment');
 Route::get('userAssignments', [AdminAssignmentController::class, 'userAssignments'])->name('userAssignments');
-Route::get('Assignments/{id}/Edit', [AdminAssignmentController::class, 'edit'])->name('assignEdit');
-Route::put('Assignments/{id}/update', [AdminAssignmentController::class, 'assignUpdate'])->name('assignUpdate');
+Route::get('Assignments/Edit/{id}', [AdminAssignmentController::class, 'edit'])->name('assignEdit');
+Route::put('Assignments/update/{id}', [AdminAssignmentController::class, 'assignUpdate'])->name('assignUpdate');
 
 //Route::get('chat', [AssignmentController::class, 'viewchat'])->name('chat');
 

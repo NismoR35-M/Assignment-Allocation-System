@@ -10,13 +10,15 @@ use Illuminate\Notifications\Notification;
 class Assignment_Assigned extends Notification
 {
     use Queueable;
-    public $assignment;
+    protected $assignment;
+    protected $user;
 
     /**
      * Create a new notification instance.
      */
-    public function __construct( $assignment)
+    public function __construct($user, $assignment)
     {
+        $this->user = $user;
         $this->assignment = $assignment;
     }
 
@@ -37,6 +39,10 @@ class Assignment_Assigned extends Notification
     {
         return (new MailMessage)
         ->subject('Assignment Assigned')
+        ->markdown('emails.assignment_assigned', [
+            'user' => $this->user,
+            'assignment' => $this->assignment,
+        ])
         ->greeting('Hello ' . $notifiable->first_name)
         ->line('You have been assigned a new assignment.')
         ->line('Assignment Name: ' . $this->assignment->name)
@@ -44,10 +50,9 @@ class Assignment_Assigned extends Notification
         ->line('Request Type: ' . $this->assignment->request_type)
         ->line('Description: ' . $this->assignment->description)
         ->line('Preffered Start date: ' . $this->assignment->start_date)
-        ->action('View Assignment', route('assignments.show', $this->assignment))
+        ->action('View Assignment', route('view_assignment', $this->assignment))
         ->line('Thank you for using our system!');
     }
-
     /**
      * Get the array representation of the notification.
      *

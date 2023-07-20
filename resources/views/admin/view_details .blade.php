@@ -110,11 +110,11 @@
 
     <style>
         .bg-color-1 {
-            background-color: lightblue; /* Add your desired background color for odd rows */
+            background-color: rgb(12, 121, 157); /* Add your desired background color for odd rows */
         }
 
         .bg-color-2 {
-            background-color: #E9ECEF; /* Add your desired background color for even rows */
+            background-color: #187cdf; /* Add your desired background color for even rows */
         }
     </style>
 </x-layout>

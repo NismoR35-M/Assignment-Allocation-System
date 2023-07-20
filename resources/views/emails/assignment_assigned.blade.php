@@ -7,7 +7,7 @@
 
     Assignment Name: {{ $assignment->name }}
 
-    @component('mail::button', ['url' => route('assignments.show', $assignment)])
+    @component('mail::button', ['url' => route('view_assignment', $assignment)])
         View Assignment
     @endcomponent
 

@@ -134,7 +134,7 @@ class AdminAssignmentController extends Controller
     {
         $assignment = Assignment::findOrFail($id);
     
-        return view('admin.view_details', compact('assignment'));
+        return view('assignment.assignment_view', compact('assignment'));
     }
 
 
@@ -183,7 +183,6 @@ class AdminAssignmentController extends Controller
     public function assignUpdate(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required',
             'company_name' => 'required',
             'request_type' => 'required',
             'description' => 'required',
@@ -197,29 +196,29 @@ class AdminAssignmentController extends Controller
         $assignment->company_name = $request->input('company_name');
         $assignment->request_type = $request->input('request_type');
         $assignment->description = $request->input('description');
-        $assignment->start_date_request_received = $request->input('start_date');
+        $assignment->start_date = $request->input('start_date');
         $assignment->status = $request->input('status');
     
         // Check if the remove attachment option is selected
         if ($request->has('remove_attachment')) {
             // Remove the current attachment
-            if ($assignment->request) {
-                Storage::disk('public')->delete($assignment->request);
-                $assignment->request = null;
+            if ($assignment->request_file) {
+                Storage::disk('public')->delete($assignment->request_file);
+                $assignment->request_file = null;
             }
         }
     
         // Handle attachment update
         if ($request->hasFile('new_attachment')) {
             // Remove the current attachment (optional)
-            if ($assignment->request) {
-                Storage::disk('public')->delete($assignment->request);
+            if ($assignment->request_file) {
+                Storage::disk('public')->delete($assignment->request_file);
             }
     
             // Upload and store the new attachment
             $newAttachment = $request->file('new_attachment');
-            $newAttachmentPath = $newAttachment->store('requests', 'public');
-            $assignment->request = $newAttachmentPath;
+            $newAttachmentPath = $newAttachment->store('request_files', 'public');
+            $assignment->request_file = $newAttachmentPath;
         }
     
         // Update members assigned

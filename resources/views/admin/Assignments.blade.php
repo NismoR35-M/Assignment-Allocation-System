@@ -70,8 +70,10 @@
                                         {{-- <td><a href="{{ route('view_assignment')
                                         }}" class="btn btn-primary"> Details</button></td>
                                      </tr> --}}
-                                         <td><a href="{{ route('view_assignment', ['id' => 1])
-                                         }}" class="btn btn-primary">View Details</button></td>
+                                         <td>
+                                            <a href="{{ route('view_assignment', ['id' => $assignment->id]) }}"
+                                            class="btn btn-primary"> View Assignment</a> 
+                                        </td>
                                       </tr>
                                      @endforeach
                                     </tbody>

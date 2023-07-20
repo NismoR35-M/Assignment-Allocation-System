@@ -4,11 +4,6 @@
         <!-- Navbar -->
         <x-navbars.navs.auth titlePage="Tables"></x-navbars.navs.auth>
         <!-- End Navbar -->
-
-        <!-- Include Flatpickr styles -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.9/dist/flatpickr.min.css">
-
-        <!-- Main content -->
         <div class="container-fluid py-4">
             <div class="row">
                 <div class="col-12">
@@ -19,102 +14,107 @@
                             </div>
                         </div>
                         <div class="card-body px-0 pb-2">
-                            <style> 
-                                input[type=text],
-                                input.date-input,
-                                textarea {
-                                 
-                                  width: 100%;
-                                  padding: 12px 20px;
-                                  margin: 8px 0;
-                                  box-sizing: border-box;
-                                  /* border: 2px solid purple; */
-                                  border-radius: 4px;
-                                  background-color:rgb(241, 241, 241);
-                                  
-                                }
+                            <div class="table-responsive p-0" style="overflow-x: auto;">
+                                <table class="table table-bordered align-items-center justify-content-center mb-0">
+                                    <tr class="bg-color-1">
+                                        <th>Id</th>
+                                        <td>{{ $assignment->id }}</td>
+                                    </tr>
+                                    <tr class="bg-color-2">
+                                        <th>Name</th>
+                                        <td>{{ $assignment->name }}</td>
+                                    </tr>
+                                    <tr class="bg-color-1">
+                                        <th>Company Name</th>
+                                        <td>{{ $assignment->company_name }}</td>
+                                    </tr>
+                                    <tr class="bg-color-2">
+                                        <th>Type</th>
+                                        <td>{{ $assignment->request_type }}</td>
+                                    </tr>
+                                    <tr class="bg-color-1">
+                                        <th>Description</th>
+                                        <td>{{ $assignment->description }}</td>
+                                    </tr>
 
-                                input[type='text']:hover{
-                                    background-color:rgba(255, 166, 0, 0.208)
-                                }
-
-                                body {
-                                 
-                                 margin-left: 2px;
-                                 }
-                                 form {
-                                  margin-left:12px;
-                                  margin-inline-end: 12px;
-                                }
-                                </style>
-                            <!-- Assignment form -->
-                            <div class="center">
-                            <form>
-                        
-                                
-                                <div class="mb-3 ">
-                                    <label for="company_name" class="form-label">Organization Name</label>
-                                    <input type="text" class="form-control" id="org_name" data-readonly readonly value="{{ $assignment->company_name }}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="request_type" class="form-label">Request Type</label>
-                                    <input type="text" class="form-control" id="request_type" data-readonly readonly value="{{ $assignment->request_type }}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="description" class="form-label">Description</label>
-                                    <textarea class="form-control" id="description" rows="3" data-readonly readonly>{{ $assignment->description }}</textarea>
-                                </div>
-
-                                <div class="mb-3">
-                                    <label for="request" class="form-label">Attachment</label>
-                                    <div>
-                                        @if($assignment->request)
-                                            <a href="{{ asset('storage/' . $assignment->request) }}" class="btn btn-primary" target="_blank">View Attachment</a>
+                                                                    <tr class="bg-color-1">
+                                        <th>Request</th>
+                                        <td>
+                                        @if ($assignment->request)
+                                            <a href="{{ asset('storage/'. $assignment->request) }}" target="_blank" class="btn btn-primary">View Request Attached</a>
                                         @else
-                                            <p>No attachment</p>
+                                            <span class="text-muted">No PDF attached</span>
                                         @endif
-                                    </div>
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label for="date_request_received" class="form-label">Date Request Received</label>
-                                    <input type="text" class="form-control" id="date_request_received" data-readonly readonly value="{{ $assignment->start_date }}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="status" class="form-label">Status</label>
-                                    <input type="text" class="form-control" id="status" data-readonly readonly value="{{ $assignment->status }}">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="members_assigned" class="form-label">Members Assigned</label>
-                                    @if ($assignment->users->count() > 0)
-                                        <ul>
-                                            @foreach($assignment->users as $user)
-                                                <li>{{ $user->first_name }}  {{ $user->last_name }} {{ $user->staff_number }}</li>
-                                            @endforeach
-                                        </ul>
-                                    @else
-                                        <p>No members assigned.</p>
-                                    @endif
-                                </div>
-                                
-                                
-                                <div class="flex">
-                                <a href="{{ route('show_assignments') }}">
-                                    <button type="button" class="btn bg-gradient-dark">Back</button>
-                                 </a>
+                                    </td>
 
-                                 <a href="{{ route('assignEdit', ['id' => $assignment->id]) }}">
-                                    <button type="button" class="btn btn-info">Edit</button>
-                                 </a>
-                                </div>
-                                
-                            </form>
+                                    </tr>
+                                    <tr class="bg-color-1">
+                                    <th>Members Assigned</th>
+                                    <td>
+                                        <div class="dropdown">
+                                         <button class="btn btn-secondary dropdown-toggle" type="button" id="membersDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                          Show Members Assigned
+                                          </button>
+                                            <ul class="dropdown-menu" aria-labelledby="membersDropdown">
+                                               @foreach ($assignment->users as $user)
+                                                  <li><a class="dropdown-item" href="#">{{ $user->first_name }}</a></li>
+                                               @endforeach
+                                            </ul>
+                                        </div>
+                                    </td>
+                                   </tr>
+
+                                   <tr class="bg-color-1">
+
+                                    <tr class="bg-color-2">
+                                        <th>Date Received</th>
+                                        <td>{{ $assignment->start_date }}</td>
+                                    </tr>
+                                    <tr class="bg-color-1">
+                                        <th>Response</th>
+                                        <td>
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#responseModal">View Response</button>
+                                        </td>
+                                    </tr>
+                                </table>
                             </div>
+                        </div>  
+                        <div class="card-footer">
+                            <a href="{{ route('assignEdit', ['id' => $assignment->id]) }}" class="btn btn-primary">Edit</a>
+                            <a href="{{ route('show_assignments') }}" class="btn btn-primary">Back</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-    
+
+     <!-- Response Modal -->
+     <div class="modal fade" id="responseModal" tabindex="-1" aria-labelledby="responseModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="responseModalLabel">Response</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>{{ $assignment->response }}</p>
+                    @if ($assignment->response_file)
+                        <a href="{{ asset('storage/'. $assignment->response_file) }}" target="_blank" class="btn btn-primary">View Attached File</a>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        .bg-color-1 {
+            background-color: rgb(149, 202, 228); /* Add your desired background color for odd rows */
+        }
+
+        .bg-color-2 {
+            background-color: #85b8f1; /* Add your desired background color for even rows */
+        }
+    </style>
 </x-layout>

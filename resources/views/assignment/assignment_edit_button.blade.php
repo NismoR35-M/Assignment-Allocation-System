@@ -80,7 +80,7 @@
                                 
                                 <div class="mb-3 ">
                                     <label for="company_name" class="form-label">Organization Name</label>
-                                    <input type="text" class="form-control" id="org_name" name="org_name" value="{{ $assignment->company_name }}">
+                                    <input type="text" class="form-control" id="company_name" name="company_name" value="{{ $assignment->company_name }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="request_type" class="form-label">Request Type</label>
@@ -91,36 +91,35 @@
                                     <textarea class="form-control smaller-textarea" id="description" name="description" rows="3">{{ old('description', $assignment->description) }}</textarea>
                                 </div>
                                 <div class="mb-3">
-                                    <label for="request" class="form-label">Request</label>
-                                    @if ($assignment->request)
-                                        <p>Current Attachment: <a href="{{ asset('storage/' . $assignment->arequest) }}" class="btn btn-primary" target="_blank">{{ $assignment->request }}</a></p>
+                                    <label for="request_file" class="form-label">Request File</label>
+                                    @if ($assignment->request_file)
+                                    <div>
+                                        <a href="{{ asset('storage/' . $assignment->request_file) }}" class="btn btn-primary" target="_blank">{{ $assignment->request_file }}</a>
+                                    </div>
                                         <label for="remove_attachment">
-                                            <input type="checkbox" id="remove_attachment" name="remove_attachment" value="1"> Remove Attachment
-                                            
+                                        <input type="checkbox" id="remove_attachment" name="remove_attachment" value="1"> Remove Attachment                                           
                                         </label>
-                                    @else
-                                        <p>No attachment uploaded.</p>
                                     @endif
                                 </div>
                                 {{-- adding a different attachment --}}
                                 <div class="mb-3">
-                                    <label for="attachment" class="form-label">New Attachment</label>
-                                    <input type="file" class="form-control " id="new_attachment" name="new_attachment">
+                                    <label for="new_attachment" class="form-label">New Attachment</label>
+                                    <input type="file" class="form-control " id="new_attachment" name="request_file">
                                 </div>
                                 
                             
                                 
                                 <div class="mb-3">
                                     <label for="start_date" class="form-label">Date Request Received</label>
-                                    <input type="date" class="form-control smaller-input" id="date_request_received" name="start_date" value="{{ old('start_date', $assignment->start_date) }}">
+                                    <input type="date" class="form-control smaller-input" id="start_date" name="start_date" value="{{ old('start_date', $assignment->start_date) }}">
                                 </div>
                                 
        
                                 <div class="mb-3">
                                     <label for="status" class="form-label">Status</label>
                                     <select class="form-control smaller-textarea" id="status" name="status">
-                                        <option value="assigned" @if ($assignment->status === 'Assigned') selected @endif>Assigned</option>
-                                        <option value="unassigned" @if ($assignment->status === 'Unassigned') selected @endif>Unassigned</option>
+                                        <option value="Assigned" @if ($assignment->status === 'Assigned') selected @endif>Assigned</option>
+                                        <option value="Unassigned" @if ($assignment->status === 'Unassigned') selected @endif>Unassigned</option>
                                     </select>
                                 </div>
                                 
@@ -135,11 +134,16 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                
-                                
-                                
-                                
-                                
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
+
                                 <button type="submit"  class="btn bg-gradient-dark">Save Changes</button>
                                 
                             </form>
