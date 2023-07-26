@@ -1,22 +1,15 @@
 
+## Collaborators
+
+Thanks to [@Tiffany](https://github.com/RivoltaAlpha) for collaborating on this project!
+
+This project was assigned to us during our attachment at the Ministry of ICT, Kenya, from May to August 2023. Together, we worked on building and enhancing the features to make it a success. Tiffany's valuable contributions and dedication greatly enriched the project, and we're proud to have collaborated with her!
+
 ## SYSTEM OVERVIEW (USER SIDE)
 
 Here is the system overview and flow of system,this user side ![Assignment Image](public/assets/img/userSystem.png)
 
 
-
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
 
 ## Contributing
 
