@@ -2,12 +2,14 @@
 namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\View\View;
 use AuthenticatesAdmins;
 use Spatie\Activitylog\Models\Activity;
 use App\Models\Assignment;
+use App\Models\User;
 
 
 class AdminController extends AdminBaseController {
@@ -54,7 +56,52 @@ class AdminController extends AdminBaseController {
         $inProgressCount = Assignment::where('status', 'In Progress')->count();
         $completedCount = Assignment::where('status', 'Completed')->count();
 
-        return view('admin.adminDashboard', compact('assignedCount', 'notAssignedCount', 'inProgressCount', 'completedCount'));
+
+
+
+        // Fetchiing assignments and grouping them by requesttype
+        $assignmentsByRequestType = Assignment::select('request_type', DB::raw('count(*) as count'))
+        ->groupBy('request_type')
+        ->get();
+
+    // Converting  the data to a format suitable for the chart
+    $data = [];
+    foreach ($assignmentsByRequestType as $assignment) {
+        $data[] = [
+            'label' => $assignment->request_type,
+            'count' => $assignment->count,
+        ];
+    }
+
+     // Fetching all users and their assigned tasks count with status = "In Progress"
+     $users = User::withCount(['assignments' => function ($query) {
+      $query->where('status', 'In Progress');
+    }])->get();
+
+    // Preparing the data for the chart
+    $userNames = $users->pluck('first_name')->toArray();
+    $taskCounts = $users->pluck('assignments_count')->toArray();
+
+
+
+
+     // Fetching the number of completed tasks for each request type
+     $requestTypes = Assignment::select('request_type')
+     ->where('status', 'Completed')
+     ->groupBy('request_type')
+     ->get();
+
+    $requestTypeLabels = $requestTypes->pluck('request_type')->toArray();
+    $completedTaskCounts = [];
+
+    foreach ($requestTypes as $requestType) {
+     $completedTaskCounts[] = Assignment::where('request_type', $requestType->request_type)
+         ->where('status', 'Completed')
+         ->count();
+    }
+
+        return view('admin.adminDashboard', compact('assignedCount', 'notAssignedCount', 'inProgressCount'
+        ,'data','userNames','taskCounts','requestTypeLabels','completedTaskCounts','completedCount'));
     }
 
     public function create()
@@ -74,5 +121,5 @@ class AdminController extends AdminBaseController {
         auth()->user()->update($attributes);
         return back()->withStatus('Profile successfully updated.');
     
-}
+    }
 }

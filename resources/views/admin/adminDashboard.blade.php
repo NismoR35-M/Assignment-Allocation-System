@@ -94,8 +94,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="mb-0 ">Website Views</h6>
-                            <p class="text-sm ">Last Campaign Performance</p>
+                            <h6 class="mb-0 ">Number of Requests</h6>
+                            <p class="text-sm ">Last Assignments requests</p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -116,9 +116,8 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <h6 class="mb-0 "> Daily Sales </h6>
-                            <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in today
-                                sales. </p>
+                            <h6 class="mb-0 "> Assigned Assignments </h6>
+                            <p class="text-sm "> (<span class="font-weight-bolder">+15%</span>) increase in Assigned assignmet</p>
                             <hr class="dark horizontal">
                             <div class="d-flex ">
                                 <i class="material-icons text-sm my-auto me-1">schedule</i>
@@ -574,6 +573,179 @@
     </div>
     @push('js')
     <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>
+
+
+
+
+    <script>
+    // Get the data from the PHP variable passed from the controller
+    const chartData = @json($data);
+
+    // Extract labels (requesttype) and count values from the data
+    const labels = chartData.map(item => item.label);
+    const counts = chartData.map(item => item.count);
+
+    console.log("Labels:", labels); // Check if labels exist in the console
+    console.log("Counts:", counts); // Check if counts exist in the console
+
+    // Create the bar chart using Chart.js
+    const ctx = document.getElementById('chart-bars').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels, // Use the extracted labels
+            datasets: [{
+                label: 'Request Type Count',
+                data: counts,
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        autoSkip: false, // Prevent the X-axis labels from being skipped
+                    },
+                },
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false // Hide the legend
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => `${context.parsed.y} Requests`, // Show the count in the tooltip
+                    }
+                }
+            }
+        }
+    });
+</script>   
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Replace this part with your actual data
+        var userNames = @json($userNames);
+        var taskCounts = @json($taskCounts);
+
+        var ctx = document.getElementById('chart-line').getContext('2d');
+        var lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: userNames,
+                datasets: [{
+                    label: 'Number of Tasks Working On',
+                    data: taskCounts,
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
+                    pointHoverBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHitRadius: 10,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        display: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        display: true,
+                        grid: {
+                            display: true,
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+
+                
+            }
+        });
+    });
+</script>
+
+
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Replace this part with your actual data
+        var requestTypeLabels = @json($requestTypeLabels);
+        var completedTaskCounts = @json($completedTaskCounts);
+
+        var ctx = document.getElementById('chart-line-tasks').getContext('2d');
+        var barChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: requestTypeLabels,
+                datasets: [{
+                    label: 'Completed Tasks',
+                    data: completedTaskCounts,
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        display: true,
+                        grid: {
+                            display: false
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        display: true,
+                        grid: {
+                            display: true,
+                            color: 'rgba(0, 0, 0, 0.05)'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    });
+</script> 
+
+
+
+
+
+
     <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -822,5 +994,10 @@
         });
 
     </script>
+
+
     @endpush
+
+
+
 </x-layout>

@@ -269,6 +269,109 @@
     </div>
     @push('js')
     <script src="{{ asset('assets') }}/js/plugins/chartjs.min.js"></script>
+
+
+    <script>
+    // Getting the data from the PHP variable passed from the controller
+    const chartData = @json($data);
+
+    // Extracting labels (requesttype) and counting values from the data
+    const labels = chartData.map(item => item.label);
+    const counts = chartData.map(item => item.count);
+
+    console.log("Labels:", labels); 
+    console.log("Counts:", counts); 
+
+    // Creating the bar chart using Chart.js
+    const ctx = document.getElementById('chart-bars').getContext('2d');
+    const myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels, 
+            datasets: [{
+                label: 'Request Type Count',
+                data: counts,
+                backgroundColor: 'rgba(75, 192, 192, 0.8)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    ticks: {
+                        autoSkip: false, // Preventing the X-axis labels from being skipped
+                    },
+                },
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins: {
+                legend: {
+                    display: false 
+                },
+                tooltip: {
+                    callbacks: {
+                        label: (context) => `${context.parsed.y} Requests`, //  Responsible for Showing the count in the tooltip
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
+
+
+
+    
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Getting the data from the PHP variables passed from the controller
+            var xAxisData = {!! $xAxis !!};
+            var yAxisData = {!! $yAxis !!};
+
+            // Creating the chart
+            new Chart(document.getElementById('assignmentStatusChart'), {
+                type: 'bar',
+                data: {
+                    labels: xAxisData,
+                    datasets: [{
+                        label: ' No Of Assignments Handling',
+                        data: yAxisData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+
+
+                    onClick: function(event, elements) {
+                if (elements.length > 0) {
+                    var clickedIndex = elements[0].index;
+                    var clickedRequestType = xAxisData[clickedIndex];
+                    // Handling navigation to the assignments table with the selected request type
+                    // For example, redirect to the URL with the filtered assignments for the request type.
+                    window.location.href = 'tables?requesttype=' + clickedRequestType;
+                }
+            }
+                }
+            });
+        });
+    </script>
+
+
+
+
+
     <script>
         var ctx = document.getElementById("chart-bars").getContext("2d");
 
@@ -518,4 +621,8 @@
 
     </script>
     @endpush
+
+
+
+
 </x-layout>
